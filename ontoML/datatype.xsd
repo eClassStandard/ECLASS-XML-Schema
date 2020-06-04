@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
 <!--
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
+-->
+<!--
+2016-10-13: added //element(*,DATATYPE_Type)/@guid
 -->
 <!--
 
@@ -53,5 +57,6 @@ WITH THAT STANDARD
 			<xs:element name="type_definition" type="ANY_TYPE_Type"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="DataTypeId" use="required"/>
+		<xs:attribute name="guid" type="EptosGUID"/>
 	</xs:complexType>
 </xs:schema>

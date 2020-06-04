@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
 <!--
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
+-->
+<!--
+Changes
+2016-10-13: added //element(*,DIC_VALUE_Type)/@guid
+2016-10-13: added //element(*,DIC_VALUE_Type)/@order_nu,ber
 -->
 <!--
 
@@ -163,6 +169,8 @@ WITH THAT STANDARD
 			<xs:element name="is_deprecated_interpretation" type="TEXT_Type" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="value_meaning_id" type="DicValueId" use="optional"/>
+		<xs:attribute name="guid" type="EptosGUID"/>
+		<xs:attribute name="order_number" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="INT_CURRENCY_TYPE_Type">
 		<xs:complexContent>

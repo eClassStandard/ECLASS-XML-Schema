@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+eCl@ssXML 2.0 - XML Schema
+-->
+<!--
+
+eCl@ssXML 2.0
+
+The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
+and derivations of the Schema:
+
+© eClass e.v. 2012 - All rights reserved
+
+Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
+copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
+installing and using software based on the Schema, and to permit persons to whom the Schema is furnished to do so, 
+subject to the following conditions:
+
+THE SCHEMA IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS 
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR OTHER DEALINGS IN THE SCHEMA.
+
+In addition, any modified copy of the Schema shall include the following notice:
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE eClassXML 2.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
+WITH THAT SCHEMA
+
+
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:qry="urn:eclass:xml-schema:query:2.0" xmlns:qy="urn:iso:std:iso:ts:29002:-31:ed-1:tech:xml-schema:query" xmlns:hea="urn:eclass:xml-schema:header:2.0" xmlns:cmn="urn:eclass:xml-schema:common:2.0" targetNamespace="urn:eclass:xml-schema:query:2.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="2.0">
+	<xsd:import namespace="urn:eclass:xml-schema:common:2.0" schemaLocation="./common/common.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:header:2.0" schemaLocation="./common/header.xsd"/>
+	<xsd:import namespace="urn:iso:std:iso:ts:29002:-31:ed-1:tech:xml-schema:query" schemaLocation="../ontoML/ISO29002/query.xsd"/>
+	<xsd:element name="eclass_queries" type="qry:ECLASSQUERIES_Type"/>
+	<xsd:complexType name="ECLASSQUERIES_Type">
+		<xsd:sequence>
+			<xsd:element ref="hea:header"/>
+			<xsd:element name="eclass_query" type="qry:ECLASSQUERY_Type" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ECLASSQUERY_Type">
+		<xsd:sequence>
+			<xsd:element name="query_header" type="qry:QUERYHEADER_Type"/>
+			<xsd:element name="query_amount" type="cmn:QUERYAMOUNT_Type"/>
+			<xsd:element name="ISO29002_query" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="qy:query"/>
+						<xsd:element ref="qy:query_context"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QUERYHEADER_Type">
+		<xsd:sequence>
+			<xsd:element name="query_identifier" type="cmn:IDENTIFICATION_Type"/>
+			<xsd:element name="previous_query_identifier" type="cmn:IDENTIFICATION_Type" minOccurs="0"/>
+			<xsd:element name="query_issued_date" type="xsd:dateTime"/>
+			<xsd:element name="response_expected_by_date" type="xsd:dateTime"/>
+			<xsd:element name="buyer" type="cmn:PARTY_Type" minOccurs="0"/>
+			<xsd:element name="supplier" type="cmn:PARTY_Type" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

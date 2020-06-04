@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+eCl@ssXML 2.0 - XML Schema
+-->
+<!--
+
+eCl@ssXML 2.0
+
+The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
+and derivations of the Schema:
+
+© eClass e.v. 2012 - All rights reserved
+
+Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
+copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
+installing and using software based on the Schema, and to permit persons to whom the Schema is furnished to do so, 
+subject to the following conditions:
+
+THE SCHEMA IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS 
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR OTHER DEALINGS IN THE SCHEMA.
+
+In addition, any modified copy of the Schema shall include the following notice:
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE eClassXML 2.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
+WITH THAT SCHEMA
+
+
+
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cmn="urn:eclass:xml-schema:common:2.0" xmlns:hea="urn:eclass:xml-schema:header:2.0" xmlns:unt="urn:eclass:xml-schema:units:2.0" xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" targetNamespace="urn:eclass:xml-schema:units:2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<xsd:import namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" schemaLocation="../unitml/UnitsML-v1.0-csd02.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:common:2.0" schemaLocation="./common/common.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:header:2.0" schemaLocation="./common/header.xsd"/>
+	<xsd:element name="eclass_units" type="unt:ECLASSUNITS_Type"/>
+	<xsd:complexType name="ECLASSUNITS_Type">
+		<xsd:sequence>
+			<xsd:element ref="hea:header"/>
+			<xsd:element name="contained_unitsml" type="unitsml:UnitsMLType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

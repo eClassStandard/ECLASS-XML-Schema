@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tmpl="urn:eclass:template:xml-schema:template" xmlns:dt="urn:eclass:template:xml-schema:data-type" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" xmlns:bas="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" targetNamespace="urn:eclass:template:xml-schema:template" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="urn:eclass:template:xml-schema:data-type" schemaLocation="data-type.xsd"/>
-	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="identifier.xsd"/>
-	<xs:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="value.xsd"/>
-	<xs:import namespace="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" schemaLocation="basic.xsd"/>
+<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
+<!--
+eCl@ssXML 2.0 - XML Schema
+-->
+<!--
+Changes
+2016-10-11: added //element(*,tmpl:prescribed_property_Type)/@order_number
+2016-10-13: added simpleType eptosGUID
+2016-10-13: added simpleType REVISION_TYPE_Type
+2016-10-13: added simpleType TemplateId
+2016-10-13: added //element(*,tmpl:templateType)/@id
+2016-10-13: added //element(*,tmpl:templateType)/@guid
+2016-10-13: added //element(*,tmpl:extended_flag_Type)/tmpl:f_title
+2016-10-13: clarification: //element(*,tmpl:extended_flag_Type)/@tmpl:f_key has to contain the IRDI of a term
+2017-02-07: added template_view (2.0.2)
+-->
+<!--
+
+eCl@ssXML 2.0
+
+The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
+and derivations of the Schema:
+
+© eClass e.v. 2012 - All rights reserved
+
+Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
+copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
+installing and using software based on the Schema, and to permit persons to whom the Schema is furnished to do so, 
+subject to the following conditions:
+
+THE SCHEMA IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS 
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR OTHER DEALINGS IN THE SCHEMA.
+
+In addition, any modified copy of the Schema shall include the following notice:
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE eClassXML 2.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
+WITH THAT SCHEMA
+
+
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tmpl="urn:eclass:template:xml-schema:template:2.0" xmlns:dt="urn:eclass:template:xml-schema:data-type:2.0" xmlns:cmn="urn:eclass:xml-schema:common:2.0" xmlns:hea="urn:eclass:xml-schema:header:2.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" xmlns:bas="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" xmlns:ontoml="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" targetNamespace="urn:eclass:template:xml-schema:template:2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0.2">
+	<xs:import namespace="urn:eclass:template:xml-schema:data-type:2.0" schemaLocation="./common/data-type.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../ontoML/ISO29002/identifier.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="../ontoML/ISO29002/value.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" schemaLocation="../ontoML/ISO29002/basic.xsd"/>
+	<xs:import namespace="urn:eclass:xml-schema:common:2.0" schemaLocation="./common/common.xsd"/>
+	<xs:import namespace="urn:eclass:xml-schema:header:2.0" schemaLocation="./common/header.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" schemaLocation="../ontoML/ontoml.xsd"/>
 	<!-- Global Elements -->
-	<xs:element name="contained_templates" type="tmpl:contained_templatesType"/>
+	<xs:element name="eclass_templates" type="tmpl:ECLASSTEMPLATES_Type"/>
+	<xs:complexType name="ECLASSTEMPLATES_Type">
+		<xs:sequence>
+			<xs:element ref="hea:header" maxOccurs="1"/>
+			<xs:element name="template" type="tmpl:templateType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:element name="template" type="tmpl:templateType"/>
 	<xs:element name="concept_use" type="tmpl:concept_use_Type"/>
 	<xs:element name="constraint" type="tmpl:constraint_Type"/>
@@ -101,7 +153,8 @@
 		<xs:attribute name="multiple_instances_allowed" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="is_differentiating" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="is_strict" type="xs:boolean" use="optional" default="true"/>
-		<xs:attribute name="target_template" type="id:IRDI_type"/>
+		<xs:attribute name="target_template" type="id:IRDI_list_type"/>
+		<xs:attribute name="order_number" type="xs:int"/>
 	</xs:complexType>
 	<!-- Prescribed Value -->
 	<xs:complexType name="prescribed_value_Type">
@@ -169,6 +222,9 @@
 		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="extended_flag_Type">
+		<xs:sequence>
+			<xs:element name="f_title" type="bas:international_text_Type" minOccurs="0"/>
+		</xs:sequence>
 		<xs:attribute name="f_key" type="xs:string" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="subset_Type">
@@ -279,20 +335,73 @@
 		<xs:sequence>
 			<xs:element name="preferred_Name" type="bas:international_text_Type" minOccurs="0"/>
 			<xs:element ref="tmpl:prescribed_item"/>
+			<xs:element name="revision" type="tmpl:REVISION_TYPE_Type" minOccurs="0"/>
+			<xs:element name="template_view" type="tmpl:template_view_Type" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="is_flat" type="xs:boolean" use="optional" default="false"/>
 		<xs:attribute name="default" type="xs:boolean"/>
+		<xs:attribute name="id" type="tmpl:TemplateId" use="optional"/>
+		<xs:attribute name="guid" type="tmpl:EptosGUID" use="optional"/>
 	</xs:complexType>
-	<xs:complexType name="headerType">
+	<xs:complexType name="template_view_Type">
 		<xs:sequence>
-			<xs:element name="version" type="xs:string"/>
-			<xs:element name="pre_processor_version" type="xs:string"/>
+			<xs:element name="template_view_name" type="ontoml:PREFERRED_NAME_Type"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element name="property_node" type="tmpl:property_node_Type">
+						<xs:annotation>
+							<xs:documentation>a property path reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="chapter" type="tmpl:chapter_Type">
+						<xs:annotation>
+							<xs:documentation>A bag of property nodes with a headline</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:choice>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="code" use="required"/>
+		<xs:attribute name="language_ref"/>
+	</xs:complexType>
+	<xs:complexType name="property_node_Type">
+		<xs:sequence>
+			<xs:element name="property_context" type="tmpl:property_context_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="ontoml:PropertyId" use="required"/>
+		<xs:attribute name="order_number" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="chapter_Type">
+		<xs:sequence>
+			<xs:element name="chapter_title" type="ontoml:PREFERRED_NAME_Type"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="property_node" type="tmpl:property_node_Type"/>
+				<xs:element name="separator">
+					<xs:annotation>
+						<xs:documentation>empty element for separator in presentation (like <hr/> in HTML)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="contained_templatesType">
-		<xs:sequence>
-			<xs:element name="header" type="tmpl:headerType"/>
-			<xs:element name="template" type="tmpl:templateType" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
+	<xs:simpleType name="EptosGUID">
+		<xs:annotation>
+			<xs:documentation>Used for Unique guid and GUID2</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="REVISION_TYPE_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TemplateId">
+		<xs:restriction base="id:IRDI_type">
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})(\-([A-Z0-9:_\.]{1,35})((\-[019])(\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5}))?)?)?#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-([A-Z0-9:_\.]{1,35})\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

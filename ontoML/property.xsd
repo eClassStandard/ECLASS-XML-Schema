@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
 <!--
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
+-->
+<!--
+Changes
+2016-10-13: added //element(*,PROPERTY_Type)/@guid
 -->
 <!--
 
@@ -88,6 +93,7 @@ WITH THAT STANDARD
 			<xs:element name="suggested_value_list" type="xs:boolean" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="id" type="PropertyId" use="required"/>
+		<xs:attribute name="guid" type="EptosGUID"/>
 	</xs:complexType>
 	<xs:complexType name="REPRESENTATION_P_DET_Type">
 		<xs:complexContent>
