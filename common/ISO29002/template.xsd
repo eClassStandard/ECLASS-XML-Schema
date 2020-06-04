@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tmpl="urn:eclass:template:xml-schema:template" xmlns:dt="urn:eclass:template:xml-schema:data-type" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" xmlns:bas="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" targetNamespace="urn:eclass:template:xml-schema:template" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:eclass:template:xml-schema:data-type" schemaLocation="data-type.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="identifier.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="value.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" schemaLocation="basic.xsd"/>
+	<!-- Global Elements -->
+	<xs:element name="contained_templates" type="tmpl:contained_templatesType"/>
+	<xs:element name="template" type="tmpl:templateType"/>
+	<xs:element name="concept_use" type="tmpl:concept_use_Type"/>
+	<xs:element name="constraint" type="tmpl:constraint_Type"/>
+	<xs:element name="identification_guide" type="tmpl:identification_guide_Type"/>
+	<xs:element name="implementation_note" type="tmpl:implementation_note_Type"/>
+	<xs:element name="prescribed_condition_element" type="tmpl:prescribed_condition_element_Type"/>
+	<xs:element name="prescribed_data_environment" type="tmpl:prescribed_data_environment_Type"/>
+	<xs:element name="prescribed_item" type="tmpl:prescribed_item_Type"/>
+	<xs:element name="prescribed_property" type="tmpl:prescribed_property_Type"/>
+	<xs:element name="prescribed_value" type="tmpl:prescribed_value_Type"/>
+	<xs:element name="user_data" type="tmpl:user_data_Type"/>
+	<!-- Global Types -->
+	<!-- Concept Use -->
+	<xs:complexType name="concept_use_Type">
+		<xs:attribute name="concept_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="preferred_term_ref" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="preferred_definition_ref" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="preferred_image_ref" type="id:IRDI_type" use="optional"/>
+	</xs:complexType>
+	<!-- Constraint -->
+	<xs:complexType name="constraint_Type">
+		<xs:sequence>
+			<xs:any minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Identification Guide -->
+	<xs:complexType name="identification_guide_Type">
+		<xs:sequence>
+			<xs:element ref="tmpl:concept_use" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:prescribed_item" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="local_id" type="xs:ID" use="optional"/>
+		<xs:attribute name="title" type="xs:string" use="optional"/>
+		<xs:attribute name="manager_reference_string" type="xs:string" use="optional"/>
+		<xs:attribute name="is_strict" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Implementation Note -->
+	<xs:complexType name="implementation_note_Type" mixed="true">
+		<xs:sequence>
+			<xs:any/>
+		</xs:sequence>
+		<xs:attribute name="language_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<!-- Prescribed Condition Element -->
+	<xs:complexType name="prescribed_condition_element_Type">
+		<xs:sequence>
+			<xs:element ref="dt:datatype" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Prescribed Data Environment -->
+	<xs:complexType name="prescribed_data_environment_Type">
+		<xs:sequence>
+			<xs:element ref="tmpl:prescribed_condition_element" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Prescribed Item -->
+	<xs:complexType name="prescribed_item_Type">
+		<xs:sequence>
+			<xs:element ref="tmpl:prescribed_property" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:constraint" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:implementation_note" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:partitions" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="local_id" type="xs:ID" use="optional"/>
+		<xs:attribute name="class_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="must_be_dependent" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<!-- Prescribed Property -->
+	<xs:complexType name="prescribed_property_Type">
+		<xs:sequence>
+			<xs:element ref="dt:datatype" minOccurs="0"/>
+			<xs:element ref="tmpl:prescribed_data_environment" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:implementation_note" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:user_data" minOccurs="0"/>
+			<xs:element ref="tmpl:property_context" minOccurs="0"/>
+			<xs:element ref="tmpl:overwritten_name" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:prop_groups" minOccurs="0"/>
+			<xs:element ref="tmpl:extended_flag" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tmpl:required_if" minOccurs="0"/>
+			<xs:element ref="tmpl:subset_constraint" minOccurs="0"/>
+			<xs:element ref="tmpl:value_generation_rules" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="combination_allowed" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="one_of_allowed" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="multiple_instances_allowed" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="is_differentiating" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="is_strict" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="target_template" type="id:IRDI_type"/>
+	</xs:complexType>
+	<!-- Prescribed Value -->
+	<xs:complexType name="prescribed_value_Type">
+		<xs:attribute name="value_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<!-- User Data -->
+	<xs:complexType name="user_data_Type">
+		<xs:sequence>
+			<xs:any/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="prop_groups_Type">
+		<xs:sequence>
+			<xs:element name="prop_group" type="tmpl:prop_group_ref_Type" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="prop_group_ref_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="part_group_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="overwritten_name_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="language_ref" type="id:IRDI_type" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="property_context_Type">
+		<xs:sequence>
+			<xs:element name="aspect_class_element" type="tmpl:class_element_Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>element used when an aspect is used</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="prop_element" type="tmpl:prop_element_Type"/>
+				<xs:element name="part_of_class_element" type="tmpl:class_element_Type"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="class_element_Type">
+		<xs:attribute name="class_ref" type="id:IRDI_type"/>
+	</xs:complexType>
+	<xs:complexType name="prop_element_Type">
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required">
+			<xs:annotation>
+				<xs:documentation>reference to the property in dictionary</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ordinal_number" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>used for specifying occurence number in cardinality. The counting starts with 0</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="target_class_ref" type="id:IRDI_type">
+			<xs:annotation>
+				<xs:documentation>specifies the target class when polimorphismous</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="extended_flag_Type">
+		<xs:attribute name="f_key" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="subset_Type">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:group ref="val:value_Group"/>
+		</xs:sequence>
+		<xs:attribute name="is_open" type="xs:string" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="value_generation_rule_Type">
+		<xs:sequence>
+			<xs:element name="entry_name" type="xs:string"/>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="text" type="xs:string"/>
+				<xs:element name="property" type="tmpl:propertyType"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="predefined_name_entry_Type">
+		<xs:sequence>
+			<xs:element name="entry_name" type="xs:string"/>
+			<xs:element name="predefined_name">
+				<xs:complexType>
+					<xs:attribute name="predefined_name_ref" type="id:IRDI_type"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="language_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="partition_Type">
+		<xs:sequence>
+			<xs:element name="group" type="tmpl:part_group_Type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>each element is a group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="default_group" type="tmpl:prop_group_ref_Type">
+				<xs:annotation>
+					<xs:documentation>default group to be used when no group is specified explicitelly</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>optional id of the partition</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="partitions_Type">
+		<xs:sequence>
+			<xs:element name="partition" type="tmpl:partition_Type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>defines one partition in terms of its groups and its default group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="required_if_Type">
+		<xs:sequence>
+			<xs:element name="valuation" type="tmpl:valuation_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="valuation_Type">
+		<xs:sequence minOccurs="0">
+			<xs:group ref="val:value_Group"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="id:IRDI_type"/>
+	</xs:complexType>
+	<xs:complexType name="propertyType">
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="localized_value_generation_rule_Type">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element name="text" type="xs:string"/>
+			<xs:element name="property" type="tmpl:propertyType"/>
+		</xs:choice>
+		<xs:attribute name="language_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="translatable_value_generation_rule_Type">
+		<xs:sequence>
+			<xs:element name="entry_name" type="xs:string"/>
+			<xs:element name="localized_value_generation_rule" type="tmpl:localized_value_generation_rule_Type" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="value_generation_rules_Type">
+		<xs:sequence>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="translatable_value_generation_rule" type="tmpl:translatable_value_generation_rule_Type"/>
+				<xs:element name="value_generation_rule" type="tmpl:value_generation_rule_Type"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="partitions" type="tmpl:partitions_Type">
+		<xs:annotation>
+			<xs:documentation>defines the partitions of the template</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="property_context" type="tmpl:property_context_Type"/>
+	<xs:element name="overwritten_name" type="tmpl:overwritten_name_Type"/>
+	<xs:element name="prop_groups" type="tmpl:prop_groups_Type"/>
+	<xs:element name="extended_flag" type="tmpl:extended_flag_Type"/>
+	<xs:element name="required_if" type="tmpl:required_if_Type"/>
+	<xs:element name="subset_constraint" type="tmpl:subset_Type"/>
+	<xs:element name="value_generation_rules" type="tmpl:value_generation_rules_Type"/>
+	<xs:complexType name="templateType">
+		<xs:sequence>
+			<xs:element name="preferred_Name" type="bas:international_text_Type" minOccurs="0"/>
+			<xs:element ref="tmpl:prescribed_item"/>
+		</xs:sequence>
+		<xs:attribute name="is_flat" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="default" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:complexType name="headerType">
+		<xs:sequence>
+			<xs:element name="version" type="xs:string"/>
+			<xs:element name="pre_processor_version" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contained_templatesType">
+		<xs:sequence>
+			<xs:element name="header" type="tmpl:headerType"/>
+			<xs:element name="template" type="tmpl:templateType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

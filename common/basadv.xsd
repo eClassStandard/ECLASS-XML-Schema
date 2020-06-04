@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:bas_adv" xmlns:cmn="urn:eclass:xml-schema:common" targetNamespace="urn:eclass:xml-schema:bas_adv" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0-b1">
+	<xsd:import namespace="urn:eclass:xml-schema:common" schemaLocation="./common.xsd"/>
+	<xsd:element name="basic_advanced_mapping" type="BASIC_ADVANCED_MAPPING_Type"/>
+	<xsd:complexType name="BASIC_ADVANCED_MAPPING_Type">
+		<xsd:sequence>
+			<xsd:element name="bas_adv_entry" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="basic_property" type="cmn:BASICPROPERTYPATH_Type"/>
+						<xsd:element name="adv_property" type="cmn:ADVANCEDPROPERTYPATH_Type"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

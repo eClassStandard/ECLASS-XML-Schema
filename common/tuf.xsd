@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:tuf" xmlns:cmn="urn:eclass:xml-schema:common" targetNamespace="urn:eclass:xml-schema:tuf" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0-b1">
+	<xsd:import namespace="urn:eclass:xml-schema:common" schemaLocation="./common.xsd"/>
+	<xsd:element name="tuf" type="TUF_Type"/>
+	<xsd:complexType name="TUF_Type">
+		<xsd:sequence>
+			<xsd:element name="tuf_entry" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="equiv_path" type="EQUIVPATHCOMMAND_Type"/>
+						<xsd:element name="delete_path" type="DELETEPATHCOMMAND_Type"/>
+						<xsd:element name="propose_value" type="PROPOSEVALUECOMMAND_Type"/>
+						<xsd:element name="delete_value" type="DELETEVALUECOMMAND_Type"/>
+						<xsd:element name="select_branch" type="SELECTBRANCHCOMMAND_Type"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DELETEVALUECOMMAND_Type">
+		<xsd:sequence>
+			<xsd:element name="source_path" type="cmn:PROPERTYPATH_Type"/>
+			<xsd:element name="value_to_delete" type="cmn:VALUEREF_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EQUIVPATHCOMMAND_Type">
+		<xsd:sequence>
+			<xsd:element name="source_path" type="cmn:PROPERTYPATH_Type"/>
+			<xsd:element name="target_path" type="cmn:PROPERTYPATH_Type"/>
+			<xsd:element name="value_mapping" type="cmn:VALUEMAPPING_Type" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="unit_mapping" type="cmn:UNITMAPPING_Type" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="incompatible_change" type="xsd:boolean" default="false" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Tells if the equivalence lead to an incompatible change</xsd:documentation>
+				</xsd:annotation></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DELETEPATHCOMMAND_Type">
+		<xsd:sequence>
+			<xsd:element name="source_path" type="cmn:PROPERTYPATH_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PROPOSEVALUECOMMAND_Type">
+		<xsd:sequence>
+			<xsd:element name="target_path" type="cmn:PROPERTYPATH_Type"/>
+			<xsd:element name="proposed_value" type="cmn:VALUEREF_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SELECTBRANCHCOMMAND_Type">
+		<xsd:sequence>
+			<xsd:element name="target_path" type="cmn:PROPERTYPATH_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

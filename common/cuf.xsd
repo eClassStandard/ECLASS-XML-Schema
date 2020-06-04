@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:cuf" xmlns:cmn="urn:eclass:xml-schema:common" targetNamespace="urn:eclass:xml-schema:cuf" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0-b1">
+	<xsd:import namespace="urn:eclass:xml-schema:common" schemaLocation="./common.xsd"/>
+	<xsd:element name="classification_updates" type="CLASSIFICATION_UPDATES_Type"/>
+	<xsd:complexType name="CLASSIFICATION_UPDATES_Type">
+		<xsd:sequence>
+			<xsd:element name="cuf_entry" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="split" type="SPLIT_CUF_Type"/>
+						<xsd:element name="join" type="JOIN_CUF_Type"/>
+						<xsd:element name="move" type="MOVE_CUF_Type"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CLASSIFICATION_CLASS_REF_Type">
+		<xsd:attribute name="hierachical_position" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="SPLIT_CUF_Type">
+		<xsd:sequence>
+			<xsd:element name="source" type="CLASSIFICATION_CLASS_REF_Type"/>
+			<xsd:element name="target" type="CLASSIFICATION_CLASS_REF_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="JOIN_CUF_Type">
+		<xsd:sequence>
+			<xsd:element name="source" type="CLASSIFICATION_CLASS_REF_Type"/>
+			<xsd:element name="target" type="CLASSIFICATION_CLASS_REF_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MOVE_CUF_Type">
+		<xsd:sequence>
+			<xsd:element name="source" type="CLASSIFICATION_CLASS_REF_Type"/>
+			<xsd:element name="new" type="CLASSIFICATION_CLASS_REF_Type"/>
+			<xsd:element name="target" type="CLASSIFICATION_CLASS_REF_Type"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classification_updates xmlns="urn:eclass:xml-schema:cuf" xmlns:cmn="urn:eclass:xml-schema:common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:eclass:xml-schema:cuf
+L:\ecl\http__www.eclass.eu__2011__eClassXML-1.0\common\cuf.xsd">
+	<cuf_entry>
+		<split>
+			<source hierachical_position="21170307"/>
+			<target hierachical_position="21170330"/>
+		</split>
+	</cuf_entry>
+	<cuf_entry>
+		<split>
+			<source hierachical_position="21170307"/>
+			<target hierachical_position="21170328"/>
+		</split>
+	</cuf_entry>
+	
+	<cuf_entry>
+		<join>
+			<source hierachical_position="27200303"/>
+			<target hierachical_position="27142316"/>
+		</join>
+	</cuf_entry>
+	
+	<cuf_entry>
+		<move>
+			<source hierachical_position="27261207" />
+			<new hierachical_position="27450210" />
+			<target hierachical_position="27450200"/>
+		</move>
+	</cuf_entry>
+</classification_updates>
