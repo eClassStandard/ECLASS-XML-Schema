@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 2.0.4 - XML Schema
+eCl@ssXML 3.0 - XML Schema
 Changes in 2.0.1: allow code_to_code and path_to_path in one file (maxOccurs set to 2)
 Changes in 2.0.2: re-add element target_path that was lost in
                   map:eclass_mapping/map:path_to_path/map:path_to_path_entry/map:propose_value
@@ -8,10 +8,11 @@ Changes in 2.0.3: FIX: the choice in COMPLEXMAPPING_Type should have been option
                   allow mapping from property of numeric type to property of level numeric type
 Changes in 2.0.4: FIX: replaced sequence with optional element code_to_code and optional element prop_to_prop 
 				to avoid cases where one of these two elements appears twice
+Changes in 3.0.1: added @target_ac / @target_ac attributes to DELETEPATH_Type
 -->
 <!--
 
-eCl@ssXML 2.0
+eCl@ssXML 3.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -36,9 +37,9 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:map="urn:eclass:xml-schema:mapping:2.0" xmlns:cmn="urn:eclass:xml-schema:common:2.0" xmlns:hea="urn:eclass:xml-schema:header:2.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:xml-schema:mapping:2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
-	<xsd:import namespace="urn:eclass:xml-schema:common:2.0" schemaLocation="./common/common.xsd"/>
-	<xsd:import namespace="urn:eclass:xml-schema:header:2.0" schemaLocation="./common/header.xsd"/>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:map="urn:eclass:xml-schema:mapping:3.0" xmlns:cmn="urn:eclass:xml-schema:common:3.0" xmlns:hea="urn:eclass:xml-schema:header:3.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:xml-schema:mapping:3.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+	<xsd:import namespace="urn:eclass:xml-schema:common:3.0" schemaLocation="./common/common.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:header:3.0" schemaLocation="./common/header.xsd"/>
 	<xsd:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../ontoML/ISO29002/identifier.xsd"/>
 	<xsd:element name="eclass_mapping" type="map:MAPPING_Type"/>
 	<xsd:complexType name="MAPPING_Type">
@@ -305,6 +306,8 @@ WITH THAT SCHEMA
 		<xsd:sequence>
 			<xsd:element name="source_path" type="cmn:PROPERTYPATH_Type"/>
 		</xsd:sequence>
+		<xsd:attribute name="target_cc" type="id:IRDI_type"/>
+		<xsd:attribute name="target_ac" type="id:IRDI_type"/>
 	</xsd:complexType>
 	<xsd:complexType name="PROPOSEVALUE_Type">
 		<xsd:sequence>

@@ -3,6 +3,11 @@
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
 -->
 <!--
+Changes:
+2018-08-21 / v2.1: New type added: DIC_QUANTITY_TYPE
+2019-02-26: moved @is_deprecated into DIC_UNIT_Type
+-->
+<!--
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -129,9 +134,14 @@ WITH THAT STANDARD
 	<xs:complexType name="DIC_UNIT_Type" abstract="false">
 		<xs:sequence>
 			<xs:element name="structured_representation" type="UNIT_Type" minOccurs="0"/>
-			<xs:element name="string_representation" type="MATHEMATICAL_STRING_Type" minOccurs="0"/>
+			<xs:element name="string_representation" type="MATHEMATICAL_STRING_Type" minOccurs="0"/>			
 		</xs:sequence>
 		<xs:attribute name="unit_ref" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+				<xs:annotation>
+						<xs:documentation>indicates that unit is deprecated from its context (true). Default / not set: false</xs:documentation>
+				</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="DIMENSIONAL_EXPONENTS_Type" abstract="false">
 		<xs:sequence>
@@ -173,4 +183,7 @@ WITH THAT STANDARD
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:complexType name="UNIT_Type" abstract="true"/>
+	<xs:complexType name="DIC_QUANTITY_Type">
+		<xs:attribute name="quantity_ref" type="id:IRDI_type" />
+	</xs:complexType>
 </xs:schema>

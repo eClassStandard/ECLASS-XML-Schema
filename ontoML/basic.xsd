@@ -47,7 +47,7 @@ WITH THAT STANDARD
 	</xs:simpleType>
 	<xs:simpleType name="REVISION_TYPE_Type">
 		<xs:restriction base="xs:string">
-			<xs:maxLength value="3"/>
+			<xs:maxLength value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="STATUS_Type">

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
 <!--
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
 -->
@@ -7,6 +6,14 @@ ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
 Changes
 2016-10-13: added //element(*,DIC_VALUE_Type)/@guid
 2016-10-13: added //element(*,DIC_VALUE_Type)/@order_nu,ber
+2018-08-21: added optional element quantity to INT_MEASURE_TYPE_Type
+2018-08-21: added optional element quantity to REAL_MEASURE_TYPE_Type
+2018-08-21: added optional element quantity to RATIONAL_MEASURE_TYPE_Type
+2019-01-02: added deprecation of unit to INT_MEASURE_TYPE_Type
+2019-01-02: added deprecation of unit to REAL_MEASURE_TYPE_Type
+2019-01-02: added deprecation of unit to RATIONAL_MEASURE_TYPE_Type
+2019-01-02: added //element(*,NON_QUANTITATIVE_INT_TYPE_Type)/its_values/dic_value/@is_deprecated
+2019-02-26: moved @is_deprecated into ANY_TYPE_Type, DIC_UNIT_Type, DIC_VALUE_Type
 -->
 <!--
 
@@ -39,7 +46,7 @@ WITH THAT STANDARD
 	<xs:include schemaLocation="unit.xsd"/>
 	<xs:include schemaLocation="constraint.xsd"/>
 	<!-- Global element -->
-	<xs:element name="dic_unit" type="DIC_UNIT_Type"/>
+	<xs:element name="dic_unit" type="DIC_UNIT_Type"/>		
 	<xs:element name="dic_value" type="DIC_VALUE_Type"/>
 	<!-- Simple type definitions -->
 	<xs:simpleType name="CURRENCY_CODE_Type">
@@ -49,13 +56,18 @@ WITH THAT STANDARD
 	</xs:simpleType>
 	<xs:complexType name="ALTERNATIVE_UNITS_Type">
 		<xs:sequence>
-			<xs:element name="dic_unit" type="DIC_UNIT_Type" maxOccurs="unbounded"/>
+			<xs:element name="dic_unit" type="DIC_UNIT_Type" maxOccurs="unbounded"/>		
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ANY_TYPE_Type" abstract="true">
 		<xs:sequence>
 			<xs:element name="constraints" type="DOMAIN_CONSTRAINTS_Type" minOccurs="0"/>
 		</xs:sequence>
+		<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation>indicates that the domain assignment is deprecated (true). Default / not set: false</xs:documentation>
+				</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="ARRAY_TYPE_Type">
 		<xs:complexContent>
@@ -171,6 +183,11 @@ WITH THAT STANDARD
 		<xs:attribute name="value_meaning_id" type="DicValueId" use="optional"/>
 		<xs:attribute name="guid" type="EptosGUID"/>
 		<xs:attribute name="order_number" type="xs:int"/>
+		<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation>indicates that the value assignment is deprecated (true). Default / not set: false. Note: Not to be confused with is_deprecated element which indicates that value is globally deprecated</xs:documentation>
+				</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="INT_CURRENCY_TYPE_Type">
 		<xs:complexContent>
@@ -188,10 +205,15 @@ WITH THAT STANDARD
 			<xs:extension base="ANY_TYPE_Type">
 				<xs:sequence>
 					<xs:element name="value_format" type="VALUE_FORMAT_TYPE_Type" minOccurs="0"/>
-					<xs:element name="unit" type="DIC_UNIT_Type" minOccurs="0"/>
+					<xs:element name="unit" type="DIC_UNIT_Type" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>there may be only one unit which has @is_deprecated = false or not set</xs:documentation>
+						</xs:annotation>					
+					</xs:element>
 					<xs:element name="alternative_units" type="ALTERNATIVE_UNITS_Type" minOccurs="0"/>
 					<xs:element name="unit_id" type="DIC_UNIT_REFERENCE_Type" minOccurs="0"/>
 					<xs:element name="alternative_unit_ids" type="DIC_UNITS_REFERENCE_Type" minOccurs="0"/>
+					<xs:element name="quantity" type="DIC_QUANTITY_Type" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -216,7 +238,7 @@ WITH THAT STANDARD
 	</xs:complexType>
 	<xs:complexType name="ITS_VALUES_Type">
 		<xs:sequence>
-			<xs:element name="dic_value" type="DIC_VALUE_Type" maxOccurs="unbounded"/>
+			<xs:element name="dic_value" type="DIC_VALUE_Type" maxOccurs="unbounded"/>			
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="LEVEL_Type">
@@ -347,10 +369,15 @@ WITH THAT STANDARD
 			<xs:extension base="ANY_TYPE_Type">
 				<xs:sequence>
 					<xs:element name="value_format" type="VALUE_FORMAT_TYPE_Type" minOccurs="0"/>
-					<xs:element name="unit" type="DIC_UNIT_Type" minOccurs="0"/>
+					<xs:element name="unit" type="DIC_UNIT_Type" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>there may be only one unit which has @is_deprecated = false or not set</xs:documentation>
+						</xs:annotation>						
+					</xs:element>
 					<xs:element name="alternative_units" type="ALTERNATIVE_UNITS_Type" minOccurs="0"/>
 					<xs:element name="unit_id" type="DIC_UNIT_REFERENCE_Type" minOccurs="0"/>
 					<xs:element name="alternative_unit_ids" type="DIC_UNITS_REFERENCE_Type" minOccurs="0"/>
+					<xs:element name="quantity" type="DIC_QUANTITY_Type" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -371,10 +398,15 @@ WITH THAT STANDARD
 			<xs:extension base="ANY_TYPE_Type">
 				<xs:sequence>
 					<xs:element name="value_format" type="VALUE_FORMAT_TYPE_Type" minOccurs="0"/>
-					<xs:element name="unit" type="DIC_UNIT_Type" minOccurs="0"/>
+					<xs:element name="unit" type="DIC_UNIT_Type" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>there may be only one unit which has @is_deprecated = false or not set</xs:documentation>
+						</xs:annotation>						
+					</xs:element>
 					<xs:element name="alternative_units" type="ALTERNATIVE_UNITS_Type" minOccurs="0"/>
 					<xs:element name="unit_id" type="DIC_UNIT_REFERENCE_Type" minOccurs="0"/>
 					<xs:element name="alternative_unit_ids" type="DIC_UNITS_REFERENCE_Type" minOccurs="0"/>
+					<xs:element name="quantity" type="DIC_QUANTITY_Type" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

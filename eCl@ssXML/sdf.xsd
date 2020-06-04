@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 2.0 - XML Schema
+eCl@ssXML 3.0 - XML Schema
 -->
 <!--
 
-eCl@ssXML 2.0
+eCl@ssXML 3.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -29,10 +29,10 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:sdf="urn:eclass:xml-schema:sdf:2.0" xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/" xmlns:ontoml="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" xmlns:ext="urn:x-ontoml-extensions:schema:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:hea="urn:eclass:xml-schema:header:2.0" targetNamespace="urn:eclass:xml-schema:sdf:2.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="2.0">
+<xsd:schema xmlns:sdf="urn:eclass:xml-schema:sdf:3.0" xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/" xmlns:ontoml="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" xmlns:ext="urn:x-ontoml-extensions:schema:core" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:hea="urn:eclass:xml-schema:header:3.0" targetNamespace="urn:eclass:xml-schema:sdf:3.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="3.0">
 	<xsd:import namespace="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" schemaLocation="../ontoML/ontoml.xsd"/>
 	<xsd:import namespace="urn:x-ontoml-extensions:schema:core" schemaLocation="../ontoML/extensions/ext-extensions.xsd"/>
-	<xsd:import namespace="urn:eclass:xml-schema:header:2.0" schemaLocation="./common/header.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:header:3.0" schemaLocation="./common/header.xsd"/>
 	<xsd:import namespace="http://docs.oasis-open.org/codelist/ns/genericode/1.0/" schemaLocation="../genericode/genericode.xsd"/>
 	<xsd:element name="eclass_sdf" type="sdf:ECLASSSDF_Type"/>
 	<xsd:complexType name="ECLASSSDF_Type">

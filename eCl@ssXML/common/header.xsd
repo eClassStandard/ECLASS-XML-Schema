@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 2.0 - XML Schema
+eCl@ssXML 3.0 - XML Schema
 -->
 <!--
 
-eCl@ssXML 2.0
+eCl@ssXML 3.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -29,8 +29,8 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:hea="urn:eclass:xml-schema:header:2.0" xmlns:cmn="urn:eclass:xml-schema:common:2.0" targetNamespace="urn:eclass:xml-schema:header:2.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="2.0">
-	<xsd:import namespace="urn:eclass:xml-schema:common:2.0" schemaLocation="./common.xsd"/>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:hea="urn:eclass:xml-schema:header:3.0" xmlns:cmn="urn:eclass:xml-schema:common:3.0" xmlns:ns1="urn:eclass:xml-schema:header:3.0" targetNamespace="urn:eclass:xml-schema:header:3.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="3.0">
+	<xsd:import namespace="urn:eclass:xml-schema:common:3.0" schemaLocation="./common.xsd"/>
 	<xsd:element name="header" type="hea:DOCUMENTHEADER_Type"/>
 	<xsd:complexType name="DOCUMENTHEADER_Type">
 		<xsd:annotation>
@@ -40,7 +40,8 @@ WITH THAT SCHEMA
 			<xsd:element name="schema_version">
 				<xsd:simpleType>
 					<xsd:restriction base="xsd:string">
-						<xsd:pattern value="eCl@ss XML 2.0"/>
+						<xsd:pattern value="eCl@ss XML 2\.0"/>
+						<xsd:pattern value="eCl@ss XML 3\.0"/>
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:element>

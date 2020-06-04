@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
 <!--
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
 -->
 <!--
 Changes
 2016-10-13: added //element(*,CLASS_Type)/@guid
+2018-08-21: fixed a type on constraint in DATATYPES_REFERENCE_Type so XSD finally goes without warnings
 -->
 <!--
 
@@ -78,7 +78,7 @@ WITH THAT STANDARD
 			</xs:element>
 			<xs:element name="defined_types" type="DATATYPES_REFERENCE_Type" minOccurs="0">
 				<xs:unique name="defined_types_Unique">
-					<xs:selector xpath="data_type"/>
+					<xs:selector xpath="datatype"/>
 					<xs:field xpath="@datatype_ref"/>
 				</xs:unique>
 			</xs:element>

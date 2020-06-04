@@ -1,4 +1,9 @@
 <!--
+eCl@ss XML 3.0 
+2019-01-07 Add extension for IRDI path
+THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-5, AND SHOULD NOT BE INTERPRETED AS COMPLYING WITH THAT STANDARD.
+-->
+<!--
 ISO TC 184/SC 4/WG 12 N5179 - ISO/TS 29002-5 Identifier - DTD fragment
 -->
 <!--
@@ -46,3 +51,6 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-5, AND SHO
 <!ENTITY irdi1 "&rai1;(#&di;#&vi;)?">
 <!ENTITY irdi2 "&rai2;(#&di;#&vi;)?">
 <!ENTITY irdi3 "&rai3;(#&di;#&vi;)?">
+<!-- IRDI path -->
+<!ENTITY irdipathelement "(&irdi1;|&irdi2;|&irdi3;)(\*[&digit;]+)?">
+<!ENTITY irdipath "(:)?&irdipathelement;((:|/)&irdipathelement;)*">

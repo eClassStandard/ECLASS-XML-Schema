@@ -7,6 +7,10 @@ Changes
 2016-10-13: added //element(*,PROPERTY_REFERENCE_Type)/@order_number
 2016-10-13: added simpleType eptosGUID
 2016-10-13: added simpleType TemplateId
+2019-01-02: added //element(*,PROPERTIES_REFERENCE_Type)/property/@is_deprecated
+2019-01-02: added //element(*,CLASSES_REFERENCE_Type)/class/@is_deprecated
+2019-02-26: moved @is_deprecated into CLASS_REFERENCE_Type, PROPERTY_REFERENCE_Type
+2019-05-06: added KeywordId and SynonymId simple types
 -->
 <!--
 
@@ -110,15 +114,39 @@ WITH THAT STANDARD
 			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})"/>
 		</xs:restriction>
 	</xs:simpleType>
-    <xs:simpleType name="TemplateId">
-        <xs:restriction base="idt:IRDI_type">
-                        <xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})(\-([A-Z0-9:_\.]{1,35})((\-[019])(\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5}))?)?)?#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
-                        <xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-([A-Z0-9:_\.]{1,35})\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
-                        <xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+	<xs:simpleType name="TemplateId">
+		<xs:restriction base="idt:IRDI_type">
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})(\-([A-Z0-9:_\.]{1,35})((\-[019])(\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5}))?)?)?#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-([A-Z0-9:_\.]{1,35})\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z3\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
 		</xs:restriction>
-    </xs:simpleType>
+	</xs:simpleType>
+	
+	<xs:simpleType name="KeywordId">
+	<xs:annotation><xs:documentation>IRDI for Keyword (Code Space Identifier of Keyword: Z5)</xs:documentation></xs:annotation>
+		<xs:restriction base="idt:IRDI_type">
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})(\-([A-Z0-9:_\.]{1,35})((\-[019])(\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5}))?)?)?#Z5\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-([A-Z0-9:_\.]{1,35})\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z5\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z5\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="SynonymId">
+	<xs:annotation><xs:documentation>IRDI for Synonym (Code Space Identifier of Synonym: Z6)</xs:documentation></xs:annotation>
+		<xs:restriction base="idt:IRDI_type">
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})(\-([A-Z0-9:_\.]{1,35})((\-[019])(\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5}))?)?)?#Z6\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-([A-Z0-9:_\.]{1,35})\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z6\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+			<xs:pattern value="([0-9]{4})\-([A-Z0-9:_\.]{1,35})\-\-\-([A-Z0-9]{1,10})_([A-Z0-9]{0,10})_([0-9]{1,5})#Z6\-([A-Z0-9:_\.]{1,71})#[0-9]{1,9}"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	
 	<xs:complexType name="CLASS_REFERENCE_Type" abstract="false" mixed="false">
 		<xs:attribute name="class_ref" type="ClassId" use="required"/>
+		<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>indicates that class reference is deprecated (true). Default / not set: false</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="CLASSES_REFERENCE_Type" abstract="false" mixed="false">
 		<xs:sequence>
@@ -160,6 +188,11 @@ WITH THAT STANDARD
 	<xs:complexType name="PROPERTY_REFERENCE_Type" abstract="false" mixed="false">
 		<xs:attribute name="property_ref" type="PropertyId" use="required"/>
 		<xs:attribute name="order_number" type="xs:int"/>
+		<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>indicates that property reference is deprecated (true). Default / not set: false</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 	</xs:complexType>
 	<xs:complexType name="PROPERTIES_REFERENCE_Type" abstract="false" mixed="false">
 		<xs:sequence>

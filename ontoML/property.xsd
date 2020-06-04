@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
 <!--
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
 -->
 <!--
 Changes
 2016-10-13: added //element(*,PROPERTY_Type)/@guid
+2019-01-02: added //element(*,PROPERTY_Type)/is_multivalent
+2019-01-02: documented //element(*,PROPERTY_Type)/suggested_value_list
+2019-01-02: set //element(*,PROPERTY_Type) cardinality to 1..n (allowed when domain was changed)
+2019-01-02: added //element(*,PROPERTY_Type)/domain/@is_deprecated
+2019-02-26: moved @is_deprecated of domain into ANY_TYPE_Type
 -->
 <!--
 
@@ -88,9 +92,22 @@ WITH THAT STANDARD
 			<xs:element name="synonymous_symbols" type="SYNONYMOUS_SYMBOLS_Type" minOccurs="0"/>
 			<xs:element name="figure" type="GRAPHICS_Type" minOccurs="0"/>
 			<xs:element name="det_classification" type="DET_CLASSIFICATION_TYPE_Type" minOccurs="0"/>
-			<xs:element name="domain" type="ANY_TYPE_Type"/>
+			<xs:element name="domain" type="ANY_TYPE_Type" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>only one domain with is_deprecated not set or set to false allowed for ontoML compatibility</xs:documentation>
+				</xs:annotation>				
+			</xs:element>
 			<xs:element name="formula" type="MATHEMATICAL_STRING_Type" minOccurs="0"/>
-			<xs:element name="suggested_value_list" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="suggested_value_list" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>indicates whether value list of property is suggested (=open, true) or restrictive (=closed, false). Default is closed for ontoML compatibility.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="is_multivalent" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>indicates whether property is  univalent (false) or multivalent (true). Default is multivalent for ontoML compatibility.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 		<xs:attribute name="id" type="PropertyId" use="required"/>
 		<xs:attribute name="guid" type="EptosGUID"/>

@@ -3,6 +3,14 @@
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
 -->
 <!--
+Changes
+2019-01-02: added //element(*,KEYWORD_Type)/label/@is_deprecated
+2019-01-02: added //element(*,SYNONYMOUS_NAME_Type)/label/@is_deprecated
+2019-01-02: added //element(*,KEYWORD_Type)/label/@is_deprecated
+2019-02-26: moved @is_deprecated into KEYWORD_LABEL_Type and SYNONYMOUS_NAME_LABEL_Type
+2019-05-06: added //element(*,KEYWORD_LABEL_Type)/@id and //element(*,SYNONYMOUS_NAME_LABEL_Type)/@id
+-->
+<!--
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -77,8 +85,16 @@ WITH THAT STANDARD
 	<xs:complexType name="KEYWORD_LABEL_Type">
 		<xs:simpleContent>
 			<xs:extension base="KEYWORD_TYPE_Type">
+				<xs:attribute name="id" type="KeywordId">
+					<xs:annotation><xs:documentation>IRDI of the keyword</xs:documentation></xs:annotation>
+				</xs:attribute>
 				<xs:attribute name="language_code" type="LANGUAGE_CODE_Type" use="optional"/>
 				<xs:attribute name="country_code" type="COUNTRY_CODE_Type" use="optional"/>
+				<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation>indicates that keyword assignment is deprecated (true). Default / not set: false</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
@@ -120,15 +136,23 @@ WITH THAT STANDARD
 	<xs:complexType name="SYNONYMOUS_NAME_LABEL_Type">
 		<xs:simpleContent>
 			<xs:extension base="SYNONYMOUS_NAME_TYPE_Type">
+				<xs:attribute name="id" type="SynonymId">
+				<xs:annotation><xs:documentation>IRDI of the synonym</xs:documentation></xs:annotation>
+				</xs:attribute>
 				<xs:attribute name="language_code" type="LANGUAGE_CODE_Type" use="optional"/>
 				<xs:attribute name="country_code" type="COUNTRY_CODE_Type" use="optional"/>
+				<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation>indicates that synonymous name is deprecated (true). Default / not set: false</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
 	<xs:complexType name="SYNONYMOUS_NAME_Type">
 		<xs:choice>
 			<xs:element name="label" type="SYNONYMOUS_NAME_LABEL_Type" maxOccurs="unbounded"/>
-		</xs:choice>
+		</xs:choice>	
 	</xs:complexType>
 	<xs:complexType name="TEXT_Type">
 		<xs:sequence>

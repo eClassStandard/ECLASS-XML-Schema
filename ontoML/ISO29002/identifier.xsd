@@ -18,7 +18,6 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-5, AND SHO
 	<!ENTITY % identifier.dtd SYSTEM "identifier.dtd">
 	%identifier.dtd;
 ]>
-
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!-- IRDI -->
 	<xs:element name="IRDI" type="id:IRDI_type"/>
@@ -39,5 +38,10 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-5, AND SHO
 	<!-- IRDI list-->
 	<xs:simpleType name="IRDI_list_type">
 		<xs:list itemType="id:IRDI_type"/>
+	</xs:simpleType>
+	<xs:simpleType name="IRDI_path_type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="&irdipath;" />
+		</xs:restriction>	
 	</xs:simpleType>
 </xs:schema>

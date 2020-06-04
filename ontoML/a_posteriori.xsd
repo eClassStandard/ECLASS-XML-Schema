@@ -3,6 +3,10 @@
 ISO TC 184/SC 4/WG 2 N869 - ISO 13584-32 OntoML - XML schema
 -->
 <!--
+Changes
+2019-02-01: added //element(*,A_POSTERIORI_VIEW_OF_Type)/@is_deprecated
+-->
+<!--
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -52,6 +56,11 @@ WITH THAT STANDARD
 					<xs:element name="model" type="CLASS_REFERENCE_Type"/>
 					<xs:element name="corresponding_properties" type="CORRESPONDING_PROPERTIES_type" minOccurs="0"/>
 				</xs:sequence>
+				<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">
+					<xs:annotation>
+						<xs:documentation>indicates that aspect assignment is deprecated (true). Default / not set: false</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

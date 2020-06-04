@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+eCl@ss XML 3.0
+2019-01-07 Changed IRDI list to IRDI path for subitem_path_property_ref
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-10, AND SHOULD NOT BE INTERPRETED AS COMPLYING WITH THAT STANDARD.
+-->
+<!--
 ISO TC 184/SC 4/WG 12 N5178 - ISO/TS 29002-10 Catalogue - XML schema
 -->
 <!--
@@ -55,7 +61,7 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-10, AND SH
 			<xs:element ref="val:environment" minOccurs="0"/>
 		</xs:sequence>
 		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
-		<xs:attribute name="subitem_path_property_ref" type="id:IRDI_list_type" use="optional"/>
+		<xs:attribute name="subitem_path_property_ref" type="id:IRDI_path_type" use="optional"/>
 		<xs:attribute name="is_proprietary" type="xs:boolean" use="optional"/>
 	</xs:complexType>
 	<!-- Reference -->
@@ -65,8 +71,8 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-10, AND SH
 		</xs:sequence>
 		<xs:attribute name="organization_ref" type="id:IRDI_type" use="optional"/>
 		<xs:attribute name="organization_code" type="xs:string" use="optional"/>
+		<xs:attribute name="reference_number" type="xs:string" use="required"/>
 		<!-- Constraint: organization_ref or organization_code (or both) must be specified. -->
 		<!-- Constraint: If both organization_ref and organization_code are specified, they must denote the same organization. -->
-		<xs:attribute name="reference_number" type="xs:string" use="required"/>
 	</xs:complexType>
 </xs:schema>

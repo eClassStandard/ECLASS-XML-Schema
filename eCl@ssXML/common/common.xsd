@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 2.0 - XML Schema
+eCl@ssXML 3.0 - XML Schema
 -->
 <!--
 
-eCl@ssXML 2.0
+eCl@ssXML 3.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -29,7 +29,7 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:common:2.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" targetNamespace="urn:eclass:xml-schema:common:2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:common:3.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" targetNamespace="urn:eclass:xml-schema:common:3.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
 	<xsd:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ontoML/ISO29002/identifier.xsd"/>
 	<xsd:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="../../ontoML/ISO29002/value.xsd"/>
 	<xsd:complexType name="PROPERTYELM_Type">

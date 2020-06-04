@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 2.0 - XML Schema
+eCl@ssXML 3.0 - XML Schema
+-->
+<!--
+Changes
+2019-05-06: replicated eClassUnitsML / eClassUnitSet / eClassUnit from UnitsML as to extend eClassUnitType
+            with preferred_name and short_name
 -->
 <!--
 
-eCl@ssXML 2.0
+eCl@ssXML 3.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -29,15 +34,69 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cmn="urn:eclass:xml-schema:common:2.0" xmlns:hea="urn:eclass:xml-schema:header:2.0" xmlns:unt="urn:eclass:xml-schema:units:2.0" xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" targetNamespace="urn:eclass:xml-schema:units:2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cmn="urn:eclass:xml-schema:common:3.0" xmlns:hea="urn:eclass:xml-schema:header:3.0" xmlns:unt="urn:eclass:xml-schema:units:3.0" xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" xmlns:ontoml="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" targetNamespace="urn:eclass:xml-schema:units:3.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
 	<xsd:import namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" schemaLocation="../unitml/UnitsML-v1.0-csd02.xsd"/>
-	<xsd:import namespace="urn:eclass:xml-schema:common:2.0" schemaLocation="./common/common.xsd"/>
-	<xsd:import namespace="urn:eclass:xml-schema:header:2.0" schemaLocation="./common/header.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:common:3.0" schemaLocation="./common/common.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:header:3.0" schemaLocation="./common/header.xsd"/>
+	<xsd:import namespace="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" schemaLocation="../ontoML/translation.xsd"/>
 	<xsd:element name="eclass_units" type="unt:ECLASSUNITS_Type"/>
+	<xsd:element name="eClassUnitsML" type="unt:eClassUnitsMLType">
+		<xsd:annotation>
+			<xsd:documentation>root element for eCl@ss units ML</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="eClassUnitSet" type="unt:eClassUnitSetType">
+		<xsd:annotation>
+			<xsd:documentation>Container for eCl@ss units.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="eClassUnit" type="unt:eClassUnitType">
+		<xsd:annotation>
+			<xsd:documentation>Element for describing units. Use in containers UnitSet or directly incorporate into a host schema.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
 	<xsd:complexType name="ECLASSUNITS_Type">
 		<xsd:sequence>
 			<xsd:element ref="hea:header"/>
-			<xsd:element name="contained_unitsml" type="unitsml:UnitsMLType"/>
+			<xsd:element ref="unt:eClassUnitsML">
+				<xsd:annotation>
+					<xsd:documentation>wrapper element for eCl@ss unitsML embedding </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
 		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eClassUnitsMLType">
+		<xsd:annotation>
+			<xsd:documentation>ComplexType for the wrapper element for eCl@ss unitsML embedding.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="unt:eClassUnitSet" minOccurs="0"/>
+			<xsd:element ref="unitsml:CountedItemSet" minOccurs="0"/>
+			<xsd:element ref="unitsml:QuantitySet" minOccurs="0"/>
+			<xsd:element ref="unitsml:DimensionSet" minOccurs="0"/>
+			<xsd:element ref="unitsml:PrefixSet" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eClassUnitSetType">
+		<xsd:annotation>
+			<xsd:documentation>Type for the eCL@ss unit container.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element ref="unt:eClassUnit" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Element for describing eCL@ss units.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eClassUnitType">
+		<xsd:complexContent>
+			<xsd:extension base="unitsml:UnitType">
+				<xsd:sequence>
+					<xsd:element name="preferred_name" type="ontoml:PREFERRED_NAME_Type" minOccurs="0"/>
+					<xsd:element name="short_name" type="ontoml:SHORT_NAME_Type" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
 	</xsd:complexType>
 </xsd:schema>

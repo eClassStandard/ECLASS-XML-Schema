@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 2.0 - XML Schema
+eCl@ssXML 3.0 - XML Schema
 -->
 <!--
 
-eCl@ssXML 2.0
+eCl@ssXML 3.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
@@ -29,7 +29,7 @@ WITH THAT SCHEMA
 
 
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dt="urn:eclass:template:xml-schema:data-type:2.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:template:xml-schema:data-type:2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dt="urn:eclass:template:xml-schema:data-type:3.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:template:xml-schema:data-type:3.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
 	<!-- Global Elements -->
 	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ontoML/ISO29002/identifier.xsd"/>
 	<xs:element name="bag_type" type="dt:bag_type_Type" substitutionGroup="dt:datatype"/>
