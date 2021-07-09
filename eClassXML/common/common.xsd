@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 3.0 - XML Schema
+ECLASS XML 3.0.1 - XML Schema
+Changes in 3.0.1: added new type ACCESSIBLE_IDENTIFICATION for identification and URL retrieval
 -->
 <!--
 
-eCl@ssXML 3.0
+ECLASS XML 3.0.1
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© eClass e.v. 2012 - All rights reserved
+© eClass e.v. 2021 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -116,6 +117,25 @@ WITH THAT SCHEMA
 				<xsd:documentation>Set to IRDI when filling irdi. Set to type of identification when using other "identifier".</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="ACCESSIBLE_IDENTIFICATION_Type">
+		<xsd:annotation>
+			<xsd:documentation>extends identification with a link for web service access</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="identification" type="IDENTIFICATION_Type" minOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Identification of the entity being referenced.
+May be a server hosted entity in which "IRDI" variant is recommended and an assorted link in "href" element. 
+May also be a "workflow peer" hosted entity for which "guid" variant is used and this should be packaged together in workflow communication partner interactions.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="href" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Link for webservice access of the entity being referenced</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="TYPEDSTRING_Type">
 		<xsd:simpleContent>

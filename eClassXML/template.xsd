@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Mit XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) von Matthias Richter (Paradine GmbH) bearbeitet -->
 <!--
-eCl@ssXML 3.0 - XML Schema
+ECLASS XML 3.0.1 - XML Schema
 -->
 <!--
 Changes
@@ -17,12 +16,12 @@ Changes
 -->
 <!--
 
-eCl@ssXML 3.0
+ECLASS XML 3.0.1
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© eClass e.v. 2012 - All rights reserved
+© eClass e.v. 2021 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 

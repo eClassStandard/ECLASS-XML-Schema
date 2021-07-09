@@ -1,0 +1,18 @@
+3.0.1
+    Added @source_cc / @source_ac attributes to PROPOSEVALUE_Type.
+	
+    ECLASSQUERY has been enhanced to contain an optional reference to the template 
+    from which conditional paths originate.
+	
+	Corrected export of global_language, no schema change (exporter 1.0.2, 202009).
+	
+	Changed restriction of schema_version in schema (20201001).
+	
+	Updated comments in all files to refer the current schema.	
+	
+	Updated in textual descriptions from "eCl@ss" to ECLASS.	
+	
+    Added @target_cc / @target_ac attributes to DELETEPATH_Type.
+	
+3.0.0 
+	Original version.

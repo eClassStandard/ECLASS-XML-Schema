@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 3.0 - XML Schema
+ECLASS XML 3.0.1 - XML Schema
 Changes in 2.0.1: allow code_to_code and path_to_path in one file (maxOccurs set to 2)
 Changes in 2.0.2: re-add element target_path that was lost in
                   map:eclass_mapping/map:path_to_path/map:path_to_path_entry/map:propose_value
@@ -8,16 +8,17 @@ Changes in 2.0.3: FIX: the choice in COMPLEXMAPPING_Type should have been option
                   allow mapping from property of numeric type to property of level numeric type
 Changes in 2.0.4: FIX: replaced sequence with optional element code_to_code and optional element prop_to_prop 
 				to avoid cases where one of these two elements appears twice
-Changes in 3.0.1: added @target_ac / @target_ac attributes to DELETEPATH_Type
+Changes in 3.0.1: added @target_cc / @target_ac attributes to DELETEPATH_Type
+				  added @source_cc / @source_ac attributes to PROPOSEVALUE_Type
 -->
 <!--
 
-eCl@ssXML 3.0
+ECLASS XML 3.0.1
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© eClass e.v. 2012 - All rights reserved
+© eClass e.v. 2021 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -64,7 +65,7 @@ WITH THAT SCHEMA
 	</xsd:complexType>
 	<xsd:complexType name="PATHTOPATH_Type">
 		<xsd:annotation>
-			<xsd:documentation>Applicable for: TUF, Mapping basic advanced, NE100 to eCl@ss</xsd:documentation>
+			<xsd:documentation>Applicable for: TUF, Mapping basic advanced, NE100 to ECLASS</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="path_to_path_entry" minOccurs="0" maxOccurs="unbounded">
@@ -314,6 +315,8 @@ WITH THAT SCHEMA
 			<xsd:element name="target_path" type="cmn:PROPERTYPATH_Type"/>
 			<xsd:element name="proposed_value" type="cmn:VALUEREF_Type"/>
 		</xsd:sequence>
+		<xsd:attribute name="source_cc" type="id:IRDI_type"/>
+		<xsd:attribute name="source_ac" type="id:IRDI_type"/>
 	</xsd:complexType>
 	<xsd:complexType name="SELECTBRANCH_Type">
 		<xsd:sequence>
@@ -453,7 +456,7 @@ WITH THAT SCHEMA
 			</xsd:element>
 			<xsd:element name="name" type="xsd:string">
 				<xsd:annotation>
-					<xsd:documentation>a human readable name, e.g. "eCl@ss"</xsd:documentation>
+					<xsd:documentation>a human readable name, e.g. "ECLASS"</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 			<xsd:element name="version_number" type="xsd:string">

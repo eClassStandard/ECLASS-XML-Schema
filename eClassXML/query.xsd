@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 3.0 - XML Schema
+ECLASS XML 3.0.1 - XML Schema
+Changes in 3.0.1: added new template_ref for eclass query
 -->
 <!--
 
-eCl@ssXML 3.0
+ECLASS XML 3.0.1
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© eClass e.v. 2012 - All rights reserved
+© eClass e.v. 2021 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -51,6 +52,11 @@ WITH THAT SCHEMA
 						<xsd:element ref="qy:query_context"/>
 					</xsd:sequence>
 				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="template_ref" type="cmn:ACCESSIBLE_IDENTIFICATION_Type" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Optional reference to the template from which the query's conditional paths originate.</xsd:documentation>
+				</xsd:annotation>
 			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>

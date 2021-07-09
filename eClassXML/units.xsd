@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-eCl@ssXML 3.0 - XML Schema
+ECLASS XML 3.0.1 - XML Schema
 -->
 <!--
 Changes
@@ -9,12 +9,12 @@ Changes
 -->
 <!--
 
-eCl@ssXML 3.0
+ECLASS XML 3.0.1
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© eClass e.v. 2012 - All rights reserved
+© eClass e.v. 2021 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -42,12 +42,12 @@ WITH THAT SCHEMA
 	<xsd:element name="eclass_units" type="unt:ECLASSUNITS_Type"/>
 	<xsd:element name="eClassUnitsML" type="unt:eClassUnitsMLType">
 		<xsd:annotation>
-			<xsd:documentation>root element for eCl@ss units ML</xsd:documentation>
+			<xsd:documentation>root element for ECLASS units ML</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 	<xsd:element name="eClassUnitSet" type="unt:eClassUnitSetType">
 		<xsd:annotation>
-			<xsd:documentation>Container for eCl@ss units.</xsd:documentation>
+			<xsd:documentation>Container for ECLASS units.</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 	<xsd:element name="eClassUnit" type="unt:eClassUnitType">
@@ -60,14 +60,14 @@ WITH THAT SCHEMA
 			<xsd:element ref="hea:header"/>
 			<xsd:element ref="unt:eClassUnitsML">
 				<xsd:annotation>
-					<xsd:documentation>wrapper element for eCl@ss unitsML embedding </xsd:documentation>
+					<xsd:documentation>wrapper element for ECLASS unitsML embedding </xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="eClassUnitsMLType">
 		<xsd:annotation>
-			<xsd:documentation>ComplexType for the wrapper element for eCl@ss unitsML embedding.</xsd:documentation>
+			<xsd:documentation>ComplexType for the wrapper element for ECLASS unitsML embedding.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element ref="unt:eClassUnitSet" minOccurs="0"/>
@@ -79,12 +79,12 @@ WITH THAT SCHEMA
 	</xsd:complexType>
 	<xsd:complexType name="eClassUnitSetType">
 		<xsd:annotation>
-			<xsd:documentation>Type for the eCL@ss unit container.</xsd:documentation>
+			<xsd:documentation>Type for the ECLASS unit container.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element ref="unt:eClassUnit" maxOccurs="unbounded">
 				<xsd:annotation>
-					<xsd:documentation>Element for describing eCL@ss units.</xsd:documentation>
+					<xsd:documentation>Element for describing ECLASS units.</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 		</xsd:sequence>
