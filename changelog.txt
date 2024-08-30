@@ -1,3 +1,7 @@
+3.1
+	Added new types for Property Data Type File, Blob (type_system.xsd, value.xsd).
+	Added name of BL/AS for properties in described_by in the context of a basic AC.
+
 3.0.1
     Added @source_cc / @source_ac attributes to PROPOSEVALUE_Type.
 	

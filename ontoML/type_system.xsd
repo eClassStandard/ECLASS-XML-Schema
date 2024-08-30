@@ -502,4 +502,22 @@ WITH THAT STANDARD
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="FILE_TYPE_Type">
+		<xs:complexContent>
+			<xs:extension base="ANY_TYPE_Type">
+				<xs:sequence>
+					<xs:element name="value_format" type="VALUE_FORMAT_TYPE_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BLOB_TYPE_Type">
+		<xs:complexContent>
+			<xs:extension base="ANY_TYPE_Type">
+				<xs:sequence>
+					<xs:element name="value_format" type="VALUE_FORMAT_TYPE_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 </xs:schema>

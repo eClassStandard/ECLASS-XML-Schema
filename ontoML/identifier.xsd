@@ -11,6 +11,7 @@ Changes
 2019-01-02: added //element(*,CLASSES_REFERENCE_Type)/class/@is_deprecated
 2019-02-26: moved @is_deprecated into CLASS_REFERENCE_Type, PROPERTY_REFERENCE_Type
 2019-05-06: added KeywordId and SynonymId simple types
+2022-01-17: added //element(*,PROPERTY_REFERENCE_Type)/preferred_name_block_aspect
 -->
 <!--
 
@@ -36,6 +37,7 @@ WITH THAT STANDARD
 
 -->
 <xs:schema xmlns="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" xmlns:idt="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="translation.xsd"/>
 	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="./ISO29002/identifier.xsd"/>
 	<xs:simpleType name="APosterioriSemanticRelationId">
 		<xs:restriction base="idt:IRDI_type">
@@ -186,6 +188,13 @@ WITH THAT STANDARD
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PROPERTY_REFERENCE_Type" abstract="false" mixed="false">
+		<xs:sequence>
+			<xs:element name="preferred_name_block_aspect" type="PREFERRED_NAME_Type" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>name of the leaf advanced block or aspect where a basic property appears mapped in the advanced end</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute name="property_ref" type="PropertyId" use="required"/>
 		<xs:attribute name="order_number" type="xs:int"/>
 		<xs:attribute name="is_deprecated" type="xs:boolean" use="optional">

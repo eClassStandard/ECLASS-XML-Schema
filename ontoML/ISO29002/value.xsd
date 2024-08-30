@@ -45,6 +45,7 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-10, AND SH
 	<xs:element name="time_value" type="val:time_value_Type"/>
 	<xs:element name="year_month_value" type="val:year_month_value_Type"/>
 	<xs:element name="year_value" type="val:year_value_Type"/>
+	<xs:element name="blob_value" type="val:blob_value_Type"/>
 	<!-- Groups -->
 	<!-- Extended Value -->
 	<xs:group name="extended_value_Group">
@@ -82,6 +83,7 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-10, AND SH
 			<xs:element ref="val:time_value"/>
 			<xs:element ref="val:year_month_value"/>
 			<xs:element ref="val:year_value"/>
+			<xs:element ref="val:blob_value"/>
 		</xs:choice>
 	</xs:group>
 	<!-- Numeric Value -->
@@ -313,5 +315,12 @@ THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO/TS 29002-10, AND SH
 		<xs:simpleContent>
 			<xs:extension base="xs:gYear"/>
 		</xs:simpleContent>
+	</xs:complexType>
+	<!-- Blob Value -->
+	<xs:complexType name="blob_value_Type">
+		<xs:sequence>
+			<xs:element name="blob" type="xs:base64Binary"/>			
+		</xs:sequence>
+		<xs:attribute name="mimeType" type="xs:string" use="required"/>
 	</xs:complexType>
 </xs:schema>

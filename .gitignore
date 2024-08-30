@@ -2,3 +2,6 @@
 .project
 .settings
 target/
+.idea
+readme.txt
+ontoML/type_system.NOT_USED_range

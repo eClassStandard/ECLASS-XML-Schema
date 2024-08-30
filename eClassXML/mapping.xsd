@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 3.0.1 - XML Schema
+ECLASS XML 3.1 - XML Schema
 Changes in 2.0.1: allow code_to_code and path_to_path in one file (maxOccurs set to 2)
 Changes in 2.0.2: re-add element target_path that was lost in
                   map:eclass_mapping/map:path_to_path/map:path_to_path_entry/map:propose_value
@@ -13,12 +13,12 @@ Changes in 3.0.1: added @target_cc / @target_ac attributes to DELETEPATH_Type
 -->
 <!--
 
-ECLASS XML 3.0.1
+ECLASS XML 3.1
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© eClass e.v. 2021 - All rights reserved
+© ECLASS e.v. 2022 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 

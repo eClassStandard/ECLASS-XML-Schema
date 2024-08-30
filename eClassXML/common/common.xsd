@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 3.0.1 - XML Schema
+ECLASS XML 3.1 - XML Schema
 Changes in 3.0.1: added new type ACCESSIBLE_IDENTIFICATION for identification and URL retrieval
 -->
 <!--
 
-ECLASS XML 3.0.1
+ECLASS XML 3.1
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© eClass e.v. 2021 - All rights reserved
+© ECLASS e.v. 2022 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
