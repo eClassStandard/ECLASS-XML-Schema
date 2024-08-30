@@ -5,7 +5,8 @@ There is a version history of development steps. The different versions are used
 - V2.0 https://github.com/eClassStandard/eClass-XML-Schema/tree/V2.0
 - V3.0 https://github.com/eClassStandard/eClass-XML-Schema/tree/V3.0
 - V3.0.1 https://github.com/eClassStandard/eClass-XML-Schema/tree/V3.0.1
-- V3.1 
+- V3.1 https://github.com/eClassStandard/eClass-XML-Schema/tree/V3.1
+- V4.0 https://github.com/eClassStandard/eClass-XML-Schema/tree/V4.0
 
 To see the changes in version history just follow these links:
 - Update from 1 to 2 https://github.com/eClassStandard/ECLASS-XML-Schema/commit/b9bd930db63331b8ef497eaff128ce9e0d0840d0
