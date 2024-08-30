@@ -1,3 +1,19 @@
+4.0.0
+
+	Added TQL attribute for preferred name and definition (CLASS, PR, VL, VA, UN).
+	Unit definition is now exported as '<definition><text>' instead of '<UnitDefinition>'
+	
+	Added Range Constraint field (<range_constraint/>) for numerical Properties.
+	
+	Added Level Type relation(ref to single-level-property inside LEVEL_Type for min,max,nom,typ) for Property of type Level, and ref back 
+	from single level property as "level_property" inside PROPERTY_Type 
+
+	Path map:eclass_mapping/map:path_to_path/map:path_to_path_entry/map:equiv_path/map:value_mapping/cmn:target_values/cmn:target_value was made unbounded
+	Element path_to_path and path_to_path tags was made global
+	Path map:eclass_mapping/map:path_to_path/map:path_to_path_entry/map:delete_value received: target_path
+	
+	LEVELS_Type restriction from mapping.xsd was changed to MIN,MAX,TYP,NOM (previously: MIN,MAX,NORM,ABS) to be the same as the restriction and values of the types used by the dictionary elements
+	
 3.1
 	Added new types for Property Data Type File, Blob (type_system.xsd, value.xsd).
 	Added name of BL/AS for properties in described_by in the context of a basic AC.

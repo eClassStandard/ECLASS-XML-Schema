@@ -61,6 +61,18 @@ WITH THAT STANDARD
 			<xs:maxLength value="255"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="TRANSLATION_QUALITY_LEVEL_Type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="Native"/>
+			<xs:pattern value="Non-Native"/>
+			<xs:pattern value="C3"/>
+			<xs:pattern value="Norm"/>
+			<xs:pattern value="Translator"/>
+			<xs:pattern value="DeepL"/>
+			<xs:pattern value="Auto"/>
+			<xs:pattern value="ECLASS Expert"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="DOCUMENT_IDENTIFIER_NAME_LABEL_Type">
 		<xs:simpleContent>
 			<xs:extension base="DOCUMENT_IDENTIFIER_NAME_Type">
@@ -79,6 +91,7 @@ WITH THAT STANDARD
 			<xs:extension base="xs:string">
 				<xs:attribute name="language_code" type="LANGUAGE_CODE_Type" use="optional"/>
 				<xs:attribute name="country_code" type="COUNTRY_CODE_Type" use="optional"/>
+				<xs:attribute name="translation_quality_level" type="TRANSLATION_QUALITY_LEVEL_Type" use="optional"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
@@ -112,6 +125,7 @@ WITH THAT STANDARD
 			<xs:extension base="PREFERRED_NAME_TYPE_Type">
 				<xs:attribute name="language_code" type="LANGUAGE_CODE_Type" use="optional"/>
 				<xs:attribute name="country_code" type="COUNTRY_CODE_Type" use="optional"/>
+				<xs:attribute name="translation_quality_level" type="TRANSLATION_QUALITY_LEVEL_Type" use="optional"/>
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>

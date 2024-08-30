@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 3.1 - XML Schema
+ECLASS XML 4.0.0 - XML Schema
 Changes in 2.0.1: allow code_to_code and path_to_path in one file (maxOccurs set to 2)
 Changes in 2.0.2: re-add element target_path that was lost in
                   map:eclass_mapping/map:path_to_path/map:path_to_path_entry/map:propose_value
@@ -10,15 +10,16 @@ Changes in 2.0.4: FIX: replaced sequence with optional element code_to_code and 
 				to avoid cases where one of these two elements appears twice
 Changes in 3.0.1: added @target_cc / @target_ac attributes to DELETEPATH_Type
 				  added @source_cc / @source_ac attributes to PROPOSEVALUE_Type
+Changes in 4.0.0: LEVELS_Type restriction was changed to MIN,MAX,TYP,NOM (previously: MIN,MAX,NORM,ABS)				
 -->
 <!--
 
-ECLASS XML 3.1
+ECLASS XML 4.0.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© ECLASS e.v. 2022 - All rights reserved
+© ECLASS e.v. 2023 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -38,9 +39,9 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:map="urn:eclass:xml-schema:mapping:3.0" xmlns:cmn="urn:eclass:xml-schema:common:3.0" xmlns:hea="urn:eclass:xml-schema:header:3.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:xml-schema:mapping:3.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
-	<xsd:import namespace="urn:eclass:xml-schema:common:3.0" schemaLocation="./common/common.xsd"/>
-	<xsd:import namespace="urn:eclass:xml-schema:header:3.0" schemaLocation="./common/header.xsd"/>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:map="urn:eclass:xml-schema:mapping:4.0" xmlns:cmn="urn:eclass:xml-schema:common:4.0" xmlns:hea="urn:eclass:xml-schema:header:4.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:xml-schema:mapping:4.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.0">
+	<xsd:import namespace="urn:eclass:xml-schema:common:4.0" schemaLocation="./common/common.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:header:4.0" schemaLocation="./common/header.xsd"/>
 	<xsd:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../ontoML/ISO29002/identifier.xsd"/>
 	<xsd:element name="eclass_mapping" type="map:MAPPING_Type"/>
 	<xsd:complexType name="MAPPING_Type">
@@ -68,23 +69,14 @@ WITH THAT SCHEMA
 			<xsd:documentation>Applicable for: TUF, Mapping basic advanced, NE100 to ECLASS</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="path_to_path_entry" minOccurs="0" maxOccurs="unbounded">
-				<xsd:complexType>
-					<xsd:choice>
-						<xsd:element name="equiv_path" type="map:EQUIVPATH_Type"/>
-						<xsd:element name="delete_path" type="map:DELETEPATH_Type"/>
-						<xsd:element name="propose_value" type="map:PROPOSEVALUE_Type"/>
-						<xsd:element name="delete_value" type="map:DELETEVALUE_Type"/>
-						<xsd:element name="select_branch" type="map:SELECTBRANCH_Type"/>
-					</xsd:choice>
-				</xsd:complexType>
-			</xsd:element>
+			<xsd:element name="path_to_path_entry" type="map:path_to_path_entryType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="DELETEVALUE_Type">
 		<xsd:sequence>
 			<xsd:element name="source_path" type="cmn:PROPERTYPATH_Type"/>
 			<xsd:element name="value_to_delete" type="cmn:VALUEREF_Type"/>
+			<xsd:element name="target_path" type="cmn:PROPERTYPATH_Type" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="EQUIVPATH_Type">
@@ -299,8 +291,8 @@ WITH THAT SCHEMA
 		<xsd:restriction base="xsd:string">
 			<xsd:pattern value="MIN"/>
 			<xsd:pattern value="MAX"/>
-			<xsd:pattern value="ABS"/>
-			<xsd:pattern value="NORM"/>
+			<xsd:pattern value="TYP"/>
+			<xsd:pattern value="NOM"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:complexType name="DELETEPATH_Type">
@@ -328,112 +320,7 @@ WITH THAT SCHEMA
 			<xsd:documentation>Includes move / split / join</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="code_to_code_entry" minOccurs="0" maxOccurs="unbounded">
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:choice>
-							<xsd:element name="source_code" type="map:code_Type"/>
-							<xsd:element name="source_code_set" type="map:code_set_Type"/>
-						</xsd:choice>
-						<xsd:choice>
-							<xsd:element name="target_code" type="map:code_Type"/>
-							<xsd:element name="target_code_set" type="map:code_set_Type"/>
-						</xsd:choice>
-						<xsd:element name="new_code" type="map:code_Type" minOccurs="0">
-							<xsd:annotation>
-								<xsd:documentation>needed for move. Set types are not applicable for move: 
-- source is class to be moved
-- target is parent class where source is moved
-- new contains code where class is moved to </xsd:documentation>
-							</xsd:annotation>
-						</xsd:element>
-						<xsd:element name="mapping_type" minOccurs="0">
-							<xsd:complexType>
-								<xsd:attribute name="type_id" type="id:IRDI_type">
-									<xsd:annotation>
-										<xsd:documentation>Instead of a type name also an IRDI may be specified for the type.</xsd:documentation>
-									</xsd:annotation>
-								</xsd:attribute>
-								<xsd:attribute name="type_name">
-									<xsd:annotation>
-										<xsd:documentation>restricted to the same mapping types as in BMEcat 2005.</xsd:documentation>
-									</xsd:annotation>
-									<xsd:simpleType>
-										<xsd:restriction base="xsd:string">
-											<xsd:enumeration value="accessories">
-												<xsd:annotation>
-													<xsd:documentation>target_code is an accessory of source_code </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="base_product">
-												<xsd:annotation>
-													<xsd:documentation>target_code is a base product (i.e. the packaging neutral description) for source_code </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="consists_of">
-												<xsd:annotation>
-													<xsd:documentation>target_code is a part of of source_code </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="diff_orderunit">
-												<xsd:annotation>
-													<xsd:documentation>target_code is has a different order unit but shared base product with source_code </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="followup">
-												<xsd:annotation>
-													<!--<xsd:appinfo>FIXME: 0173-1#RL-AAA005#001</xsd:appinfo>-->
-													<xsd:documentation>target_code is a follow up of source_code </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="mandatory">
-												<xsd:annotation>
-													<xsd:documentation>target_code is required to be ordered when source_code is ordered </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="similar">
-												<xsd:annotation>
-													<xsd:documentation>target_code is a possible alternative to source_code (weak suggestion, no guarantee)</xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="select">
-												<xsd:annotation>
-													<xsd:documentation>target_code can only be ordered when  source_code is ordered </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="sparepart">
-												<xsd:annotation>
-													<xsd:documentation>target_code is a spare part for source_code (can be replaced separately) </xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-											<xsd:enumeration value="others">
-												<xsd:annotation>
-													<xsd:documentation>target_code is related to source_code with no clear meaning</xsd:documentation>
-												</xsd:annotation>
-											</xsd:enumeration>
-										</xsd:restriction>
-									</xsd:simpleType>
-								</xsd:attribute>
-							</xsd:complexType>
-						</xsd:element>
-					</xsd:sequence>
-					<xsd:attribute name="direction" type="map:MAPPINGDIRECTION_Type" default="bijective">
-						<xsd:annotation>
-							<xsd:documentation>mapping can be interpreted injective, surjective or bijective?</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-					<xsd:attribute name="designation">
-						<xsd:annotation>
-							<xsd:documentation>e.g. "move", "split", "join"</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-					<xsd:attribute name="remark" type="xsd:string">
-						<xsd:annotation>
-							<xsd:documentation>informative remark on the mapping</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-				</xsd:complexType>
-			</xsd:element>
+			<xsd:element name="code_to_code_entry" type="map:code_to_code_entryType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="KVPAIR_Type">
@@ -518,5 +405,118 @@ WITH THAT SCHEMA
 				</xsd:sequence>
 			</xsd:choice>
 		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="code_to_code_entryType">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="source_code" type="map:code_Type"/>
+				<xsd:element name="source_code_set" type="map:code_set_Type"/>
+			</xsd:choice>
+			<xsd:choice>
+				<xsd:element name="target_code" type="map:code_Type"/>
+				<xsd:element name="target_code_set" type="map:code_set_Type"/>
+			</xsd:choice>
+			<xsd:element name="new_code" type="map:code_Type" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>needed for move. Set types are not applicable for move: 
+- source is class to be moved
+- target is parent class where source is moved
+- new contains code where class is moved to </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="mapping_type" minOccurs="0">
+				<xsd:complexType>
+					<xsd:attribute name="type_id" type="id:IRDI_type">
+						<xsd:annotation>
+							<xsd:documentation>Instead of a type name also an IRDI may be specified for the type.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+					<xsd:attribute name="type_name">
+						<xsd:annotation>
+							<xsd:documentation>restricted to the same mapping types as in BMEcat 2005.</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="accessories">
+									<xsd:annotation>
+										<xsd:documentation>target_code is an accessory of source_code </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="base_product">
+									<xsd:annotation>
+										<xsd:documentation>target_code is a base product (i.e. the packaging neutral description) for source_code </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="consists_of">
+									<xsd:annotation>
+										<xsd:documentation>target_code is a part of of source_code </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="diff_orderunit">
+									<xsd:annotation>
+										<xsd:documentation>target_code is has a different order unit but shared base product with source_code </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="followup">
+									<xsd:annotation>
+										<!--<xsd:appinfo>FIXME: 0173-1#RL-AAA005#001</xsd:appinfo>-->
+										<xsd:documentation>target_code is a follow up of source_code </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="mandatory">
+									<xsd:annotation>
+										<xsd:documentation>target_code is required to be ordered when source_code is ordered </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="similar">
+									<xsd:annotation>
+										<xsd:documentation>target_code is a possible alternative to source_code (weak suggestion, no guarantee)</xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="select">
+									<xsd:annotation>
+										<xsd:documentation>target_code can only be ordered when  source_code is ordered </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="sparepart">
+									<xsd:annotation>
+										<xsd:documentation>target_code is a spare part for source_code (can be replaced separately) </xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+								<xsd:enumeration value="others">
+									<xsd:annotation>
+										<xsd:documentation>target_code is related to source_code with no clear meaning</xsd:documentation>
+									</xsd:annotation>
+								</xsd:enumeration>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="direction" type="map:MAPPINGDIRECTION_Type" default="bijective">
+			<xsd:annotation>
+				<xsd:documentation>mapping can be interpreted injective, surjective or bijective?</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="designation">
+			<xsd:annotation>
+				<xsd:documentation>e.g. "move", "split", "join"</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="remark" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>informative remark on the mapping</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="path_to_path_entryType">
+		<xsd:choice>
+			<xsd:element name="equiv_path" type="map:EQUIVPATH_Type"/>
+			<xsd:element name="delete_path" type="map:DELETEPATH_Type"/>
+			<xsd:element name="propose_value" type="map:PROPOSEVALUE_Type"/>
+			<xsd:element name="delete_value" type="map:DELETEVALUE_Type"/>
+			<xsd:element name="select_branch" type="map:SELECTBRANCH_Type"/>
+		</xsd:choice>
 	</xsd:complexType>
 </xsd:schema>

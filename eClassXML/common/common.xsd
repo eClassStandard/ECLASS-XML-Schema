@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 3.1 - XML Schema
+ECLASS XML 4.0.0 - XML Schema
 Changes in 3.0.1: added new type ACCESSIBLE_IDENTIFICATION for identification and URL retrieval
 -->
 <!--
 
-ECLASS XML 3.1
+ECLASS XML 4.0.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© ECLASS e.v. 2022 - All rights reserved
+© ECLASS e.v. 2023 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -30,7 +30,7 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:common:3.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" targetNamespace="urn:eclass:xml-schema:common:3.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:common:4.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" targetNamespace="urn:eclass:xml-schema:common:4.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.0">
 	<xsd:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ontoML/ISO29002/identifier.xsd"/>
 	<xsd:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="../../ontoML/ISO29002/value.xsd"/>
 	<xsd:complexType name="PROPERTYELM_Type">
@@ -75,7 +75,7 @@ WITH THAT SCHEMA
 				<xsd:element name="target_values">
 					<xsd:complexType>
 						<xsd:sequence>
-							<xsd:element name="target_value" type="VALUEREF_Type"/>
+							<xsd:element name="target_value" type="VALUEREF_Type" maxOccurs="unbounded"/>
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>

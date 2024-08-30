@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 3.1 - XML Schema
+ECLASS XML 4.0.0 - XML Schema
 -->
 <!--
 Changes
+2023-07-10: added definition in eClassUnitType (to replace UnitDefinition from base schema)
 2019-05-06: replicated eClassUnitsML / eClassUnitSet / eClassUnit from UnitsML as to extend eClassUnitType
             with preferred_name and short_name
 -->
 <!--
 
-ECLASS XML 3.1
+ECLASS XML 4.0.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© ECLASS e.v. 2022 - All rights reserved
+© ECLASS e.v. 2023 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -34,10 +35,10 @@ WITH THAT SCHEMA
 
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cmn="urn:eclass:xml-schema:common:3.0" xmlns:hea="urn:eclass:xml-schema:header:3.0" xmlns:unt="urn:eclass:xml-schema:units:3.0" xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" xmlns:ontoml="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" targetNamespace="urn:eclass:xml-schema:units:3.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cmn="urn:eclass:xml-schema:common:4.0" xmlns:hea="urn:eclass:xml-schema:header:4.0" xmlns:unt="urn:eclass:xml-schema:units:4.0" xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" xmlns:ontoml="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" targetNamespace="urn:eclass:xml-schema:units:4.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.0">
 	<xsd:import namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" schemaLocation="../unitml/UnitsML-v1.0-csd02.xsd"/>
-	<xsd:import namespace="urn:eclass:xml-schema:common:3.0" schemaLocation="./common/common.xsd"/>
-	<xsd:import namespace="urn:eclass:xml-schema:header:3.0" schemaLocation="./common/header.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:common:4.0" schemaLocation="./common/common.xsd"/>
+	<xsd:import namespace="urn:eclass:xml-schema:header:4.0" schemaLocation="./common/header.xsd"/>
 	<xsd:import namespace="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" schemaLocation="../ontoML/translation.xsd"/>
 	<xsd:element name="eclass_units" type="unt:ECLASSUNITS_Type"/>
 	<xsd:element name="eClassUnitsML" type="unt:eClassUnitsMLType">
@@ -95,6 +96,7 @@ WITH THAT SCHEMA
 				<xsd:sequence>
 					<xsd:element name="preferred_name" type="ontoml:PREFERRED_NAME_Type" minOccurs="0"/>
 					<xsd:element name="short_name" type="ontoml:SHORT_NAME_Type" minOccurs="0"/>
+					<xsd:element name="definition" type="ontoml:TEXT_Type" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

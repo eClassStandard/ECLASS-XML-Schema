@@ -131,7 +131,9 @@ WITH THAT STANDARD
 			<xs:extension base="DOMAIN_CONSTRAINT_Type">
 				<xs:sequence>
 					<xs:element name="min_value" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="min_is_inclusive" type="xs:boolean" minOccurs="0"/>
 					<xs:element name="max_value" type="xs:decimal" minOccurs="0"/>
+					<xs:element name="max_is_inclusive" type="xs:boolean" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
