@@ -1,5 +1,5 @@
 # XML-Schema
-This repository contains the ECLASS XML-Schema, which is also available on https://wiki.eclass.eu/wiki/eClassXML .
+This repository contains the ECLASS XML-Schema, which is also available on [https://eclass.eu/support/technical-specification/structure-and-elements/eclassxml ](https://eclass.eu/support/technical-specification/structure-and-elements/eclassxml ) .
 There is a version history of development steps. The different versions are used in different ECLASS releases. To identify the version the tag feature of Git can be used. Currently the following versions are available:
 - V1.0 https://github.com/eClassStandard/eClass-XML-Schema/tree/V1.0
 - V2.0 https://github.com/eClassStandard/eClass-XML-Schema/tree/V2.0
