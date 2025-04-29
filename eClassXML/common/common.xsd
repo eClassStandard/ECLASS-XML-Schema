@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 4.0.0 - XML Schema
+ECLASS XML 5.0.0 - XML Schema
 Changes in 3.0.1: added new type ACCESSIBLE_IDENTIFICATION for identification and URL retrieval
 -->
 <!--
 
-ECLASS XML 4.0.0
+ECLASS XML 5.0.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© ECLASS e.v. 2023 - All rights reserved
+© ECLASS e.v. 2024 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -24,21 +24,26 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR O
 
 In addition, any modified copy of the Schema shall include the following notice:
 
-THIS SCHEMA HAS BEEN MODIFIED FROM THE eClassXML 2.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
+THIS SCHEMA HAS BEEN MODIFIED FROM THE ECLASSXML 5.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
 WITH THAT SCHEMA
 
-
-
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:common:4.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" targetNamespace="urn:eclass:xml-schema:common:4.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.0">
-	<xsd:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ontoML/ISO29002/identifier.xsd"/>
-	<xsd:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="../../ontoML/ISO29002/value.xsd"/>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:eclass:xml-schema:common:5.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" targetNamespace="urn:eclass:xml-schema:common:5.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.0">
+	<xsd:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ISO29002/identifier.xsd"/>
+	<xsd:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="../../ISO29002/value.xsd"/>
 	<xsd:complexType name="PROPERTYELM_Type">
+		<xsd:annotation>
+			<xsd:documentation>Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:attribute name="ref" type="id:IRDI_type" use="required"/>
 		<xsd:attribute name="ordinal_number" type="xsd:int"/>
 		<xsd:attribute name="target_class_ref" type="id:IRDI_type"/>
 	</xsd:complexType>
 	<xsd:complexType name="PROPERTYPATH_Type">
+		<xsd:annotation>
+			<xsd:documentation>Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="property" type="PROPERTYELM_Type" maxOccurs="unbounded"/>
 		</xsd:sequence>
@@ -47,6 +52,9 @@ WITH THAT SCHEMA
 		<xsd:attribute name="aspect" type="id:IRDI_type"/>
 	</xsd:complexType>
 	<xsd:complexType name="ADVANCEDPROPERTYPATH_Type">
+		<xsd:annotation>
+			<xsd:documentation>Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="property" type="PROPERTYELM_Type" maxOccurs="unbounded"/>
 		</xsd:sequence>
@@ -54,20 +62,32 @@ WITH THAT SCHEMA
 		<xsd:attribute name="aspect" type="id:IRDI_type"/>
 	</xsd:complexType>
 	<xsd:complexType name="BASICPROPERTYPATH_Type">
+		<xsd:annotation>
+			<xsd:documentation>Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:attribute name="ac" type="id:IRDI_type" use="required"/>
 		<xsd:attribute name="aspect" type="id:IRDI_type"/>
 		<xsd:attribute name="prop_ref" type="id:IRDI_type" use="required"/>
 	</xsd:complexType>
 	<xsd:complexType name="VALUEREF_Type">
+		<xsd:annotation>
+			<xsd:documentation>Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:group ref="val:value_Group"/>
 	</xsd:complexType>
 	<xsd:complexType name="UNITMAPPING_Type">
+		<xsd:annotation>
+			<xsd:documentation>Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="source_unit" type="id:IRDI_type"/>
 			<xsd:element name="target_unit" type="id:IRDI_type"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="VALUEMAPPING_Type">
+		<xsd:annotation>
+			<xsd:documentation> EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="source_value" type="VALUEREF_Type"/>
 			<xsd:choice>
@@ -83,11 +103,17 @@ WITH THAT SCHEMA
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="NUMERICVALUE_Type">
+		<xsd:annotation>
+			<xsd:documentation> EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:choice>
 			<xsd:group ref="val:numeric_value"/>
 		</xsd:choice>
 	</xsd:complexType>
 	<xsd:complexType name="LOCALE_Type">
+		<xsd:annotation>
+			<xsd:documentation>IDENTIFICATION_Type.  EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:attribute name="language_ref" type="id:IRDI_type" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>IRDI of language code. Should be given together with country_ref.</xsd:documentation>
@@ -106,7 +132,7 @@ WITH THAT SCHEMA
 	</xsd:complexType>
 	<xsd:complexType name="IDENTIFICATION_Type">
 		<xsd:annotation>
-			<xsd:documentation>defines forms of identification</xsd:documentation>
+			<xsd:documentation> EXCLASS Extension: Not used by ECLASS dictionary exchange </xsd:documentation>
 		</xsd:annotation>
 		<xsd:choice>
 			<xsd:element name="irdi" type="id:IRDI_type"/>
@@ -120,7 +146,7 @@ WITH THAT SCHEMA
 	</xsd:complexType>
 	<xsd:complexType name="ACCESSIBLE_IDENTIFICATION_Type">
 		<xsd:annotation>
-			<xsd:documentation>extends identification with a link for web service access</xsd:documentation>
+			<xsd:documentation>extends identification with a link for web service access. EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="identification" type="IDENTIFICATION_Type" minOccurs="1">
@@ -138,6 +164,9 @@ May also be a "workflow peer" hosted entity for which "guid" variant is used and
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="TYPEDSTRING_Type">
+		<xsd:annotation>
+			<xsd:documentation>EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:simpleContent>
 			<xsd:extension base="LOCALIZEDSTRING_Type">
 				<xsd:attribute name="type" type="xsd:string" use="required"/>
@@ -145,6 +174,9 @@ May also be a "workflow peer" hosted entity for which "guid" variant is used and
 		</xsd:simpleContent>
 	</xsd:complexType>
 	<xsd:complexType name="LOCALIZEDSTRING_Type">
+		<xsd:annotation>
+			<xsd:documentation>EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:string">
 				<xsd:attribute name="language_code" type="LANGUAGECODE_Type" use="required"/>
@@ -153,6 +185,9 @@ May also be a "workflow peer" hosted entity for which "guid" variant is used and
 		</xsd:simpleContent>
 	</xsd:complexType>
 	<xsd:complexType name="QUERYAMOUNT_Type">
+		<xsd:annotation>
+			<xsd:documentation>EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:float">
 				<xsd:attribute name="base_unit" type="id:IRDI_type" use="required"/>
@@ -161,6 +196,9 @@ May also be a "workflow peer" hosted entity for which "guid" variant is used and
 		</xsd:simpleContent>
 	</xsd:complexType>
 	<xsd:complexType name="PARTY_Type">
+		<xsd:annotation>
+			<xsd:documentation>EXCLASS Extension: Not used by ECLASS dictionary exchange</xsd:documentation>
+		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:choice>
 				<xsd:element name="name" type="xsd:string"/>
@@ -189,7 +227,7 @@ May also be a "workflow peer" hosted entity for which "guid" variant is used and
 	</xsd:complexType>
 	<xsd:simpleType name="LANGUAGECODE_Type">
 		<xsd:annotation>
-			<xsd:documentation>alpha-3 language code according to ISO3166-1
+			<xsd:documentation>alpha-3 language code according to ISO3166-1 EXCLASS Extension: Not used by ECLASS dictionary exchange
 	Examples: DEU - Germany, GBR - United Kingdom
 	</xsd:documentation>
 		</xsd:annotation>
@@ -200,7 +238,7 @@ May also be a "workflow peer" hosted entity for which "guid" variant is used and
 	</xsd:simpleType>
 	<xsd:simpleType name="COUNTRYCODE_Type">
 		<xsd:annotation>
-			<xsd:documentation>three letter terminological language code according to ISO639-2/T
+			<xsd:documentation>three letter terminological language code according to ISO639-2/T - EXCLASS Extension: Not used by ECLASS dictionary exchange
 	Examples: deu - Deutsch, eng - English
 	</xsd:documentation>
 		</xsd:annotation>

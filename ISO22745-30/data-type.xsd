@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+$Id: data-type.xsd 201 2009-02-05 20:39:23Z radack $
+ISO TC 184/SC 4/WG 12 N5159 - ISO 22745-30 Data type - XML schema
+-->
+<!--
+The following permission notice and disclaimer shall be included in all copies of this XML schema ("the Schema"), and derivations of the Schema:
+
+Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, installing and using software based on the  Schema, and to permit persons to whom the Schema is furnished to do so, subject to the following conditions:
+
+THE SCHEMA IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR OTHER DEALINGS IN THE SCHEMA.
+
+In addition, any modified copy of the Schema shall include the following notice:
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO 22745-30, AND SHOULD NOT BE INTERPRETED AS COMPLYING WITH THAT STANDARD.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dt="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:data-type" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:data-type" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!-- Global Elements -->
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../ISO29002/identifier.xsd"/>
+	<xs:element name="bag_type" type="dt:bag_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="boolean_type" type="dt:boolean_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="choice_type" type="dt:choice_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="composite_type" type="dt:composite_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="controlled_value_type" type="dt:controlled_value_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="currency_type" type="dt:currency_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="datatype" type="dt:datatype_Type" abstract="true"/>
+	<xs:element name="date_type" type="dt:date_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="date_time_type" type="dt:date_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="field" type="dt:field_specification_type_Type"/>
+	<xs:element name="file_type" type="dt:file_type_Type"/>
+	<xs:element name="integer_format" type="dt:integer_format_Type"/>
+	<xs:element name="integer_type" type="dt:integer_type_Type" substitutionGroup="dt:numeric_type"/>
+	<xs:element name="item_reference_type" type="dt:item_reference_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="localized_text_type" type="dt:localized_text_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="measure_type" type="dt:measure_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="measure_number_type" type="dt:measure_number_type_Type" substitutionGroup="dt:measure_type"/>
+	<xs:element name="measure_range_type" type="dt:measure_range_type_Type" substitutionGroup="dt:measure_type"/>
+	<xs:element name="numeric_type" type="dt:numeric_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="prescribed_currency" type="dt:prescribed_currency_Type"/>
+	<xs:element name="prescribed_qualifier_of_measure" type="dt:prescribed_qualifier_of_measure_Type"/>
+	<xs:element name="prescribed_unit_of_measure" type="dt:prescribed_unit_of_measure_Type"/>
+	<xs:element name="rational_type" type="dt:rational_type_Type" substitutionGroup="dt:numeric_type"/>
+	<xs:element name="real_format" type="dt:real_format_Type"/>
+	<xs:element name="real_type" type="dt:real_type_Type" substitutionGroup="dt:numeric_type"/>
+	<xs:element name="sequence_type" type="dt:sequence_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="set_type" type="dt:set_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="string_format" type="dt:string_format_Type"/>
+	<xs:element name="string_type" type="dt:string_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="time_type" type="dt:time_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="value_of_property" type="dt:value_of_property_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="year_type" type="dt:year_type_Type" substitutionGroup="dt:datatype"/>
+	<xs:element name="year_month_type" type="dt:year_month_type_Type" substitutionGroup="dt:datatype"/>
+	<!-- Aggregate Type -->
+	<xs:complexType name="aggregate_type_Type" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:sequence>
+					<xs:element ref="dt:datatype"/>
+				</xs:sequence>
+				<xs:attribute name="lower_bound" type="xs:nonNegativeInteger" use="required"/>
+				<xs:attribute name="upper_bound" type="xs:nonNegativeInteger" use="optional"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Bag Type -->
+	<xs:complexType name="bag_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:aggregate_type_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Boolean Type -->
+	<xs:complexType name="boolean_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Choice Type -->
+	<xs:complexType name="choice_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:sequence>
+					<xs:element ref="dt:datatype" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Complex Type -->
+	<xs:complexType name="complex_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:numeric_type_Type">
+				<xs:sequence>
+					<xs:element name="real_part_format" type="dt:real_format_Type" minOccurs="0"/>
+					<xs:element name="imaginary_part_format" type="dt:real_format_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Composite Type -->
+	<xs:complexType name="composite_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:sequence>
+					<xs:element ref="dt:field" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Controlled Value Type -->
+	<xs:complexType name="controlled_value_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:sequence>
+					<xs:element ref="dt:value_of_property" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Currency Type -->
+	<xs:complexType name="currency_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:sequence>
+					<xs:element ref="dt:numeric_type"/>
+					<xs:element ref="dt:prescribed_currency" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Datatype -->
+	<xs:complexType name="datatype_Type">
+		<xs:attribute name="representation_ref" type="id:IRDI_type" use="optional"/>
+	</xs:complexType>
+	<!-- Date Type -->
+	<xs:complexType name="date_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Date Time Type -->
+	<xs:complexType name="date_time_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- File Type -->
+	<xs:complexType name="file_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Field Specification -->
+	<xs:complexType name="field_specification_type_Type">
+		<xs:sequence>
+			<xs:element ref="dt:datatype"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Integer Format -->
+	<xs:complexType name="integer_format_Type">
+		<xs:attribute name="pattern" type="xs:string" use="required"/>
+		<xs:attribute name="symbols" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<!-- Integer Type -->
+	<xs:complexType name="integer_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:numeric_type_Type">
+				<xs:sequence>
+					<xs:element ref="dt:integer_format" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Item Reference Type -->
+	<xs:complexType name="item_reference_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:attribute name="prescribed_item_ref" type="id:IRDI_type" use="optional"/>
+				<xs:attribute name="prescribed_item_local_ref" type="xs:IDREF" use="optional"/>
+			</xs:extension>
+			<!-- Constraint: prescribed_item_ref or prescribed_item_local_ref (but not both) must be specified. -->
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Localized Text Type -->
+	<xs:complexType name="localized_text_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Measure Number Type -->
+	<xs:complexType name="measure_number_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:measure_type_Type">
+				<xs:sequence>
+					<xs:element ref="dt:prescribed_qualifier_of_measure" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="unqualified_value_allowed" type="xs:boolean" use="optional" default="true"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Measure Range Type -->
+	<xs:complexType name="measure_range_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:measure_type_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Measure Type -->
+	<xs:complexType name="measure_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:sequence>
+					<xs:element ref="dt:numeric_type" minOccurs="0"/>
+					<xs:element ref="dt:prescribed_unit_of_measure" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Numeric Type -->
+	<xs:complexType name="numeric_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Prescribed Currency -->
+	<xs:complexType name="prescribed_currency_Type">
+		<xs:attribute name="currency_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<!-- Prescribed Qualifier -->
+	<xs:complexType name="prescribed_qualifier_of_measure_Type">
+		<xs:attribute name="qualifier_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Prescribed Unit of Measure -->
+	<xs:complexType name="prescribed_unit_of_measure_Type">
+		<xs:sequence>
+			<xs:element ref="dt:numeric_type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="UOM_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<!-- Rational Type -->
+	<xs:complexType name="rational_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:numeric_type_Type">
+				<xs:sequence>
+					<xs:element ref="dt:real_format" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Real Format -->
+	<xs:complexType name="real_format_Type">
+		<xs:attribute name="pattern" type="xs:string" use="required"/>
+		<xs:attribute name="symbols" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<!-- Real Type -->
+	<xs:complexType name="real_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:numeric_type_Type">
+				<xs:sequence>
+					<xs:element ref="dt:real_format" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Sequence Type -->
+	<xs:complexType name="sequence_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:aggregate_type_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Set Type -->
+	<xs:complexType name="set_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:aggregate_type_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- String Format -->
+	<xs:complexType name="string_format_Type">
+		<xs:attribute name="pattern" type="xs:string" use="required"/>
+	</xs:complexType>
+	<!-- String Type -->
+	<xs:complexType name="string_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:sequence>
+					<xs:element name="string_format" type="dt:string_format_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Time Type -->
+	<xs:complexType name="time_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Value of Property -->
+	<xs:complexType name="value_of_property_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type">
+				<xs:attribute name="value_ref" type="id:IRDI_type" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Year Type -->
+	<xs:complexType name="year_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Year Month Type -->
+	<xs:complexType name="year_month_type_Type">
+		<xs:complexContent>
+			<xs:extension base="dt:datatype_Type"/>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

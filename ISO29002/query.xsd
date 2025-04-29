@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ISO TC 184/SC 4/WG 12 N6664 - ISO/TS 29002-31 Query - XML schema
+-->
+<!--
+The following permission notice and disclaimer shall be included in all copies of this XML schema ("the Schema"), and derivations of the Schema:
+
+Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, installing and using software based on the  Schema, and to permit persons to whom the Schema is furnished to do so, subject to the following conditions:
+
+THE SCHEMA IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR OTHER DEALINGS IN THE SCHEMA.
+
+In addition, any modified copy of the Schema shall include the following notice:
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO 29002-31, AND SHOULD NOT BE INTERPRETED AS COMPLYING WITH THAT STANDARD.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:qy="urn:iso:std:iso:ts:29002:-31:ed-1:tech:xml-schema:query" xmlns:cat="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:catalogue" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" xmlns:bas="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:iso:std:iso:ts:29002:-31:ed-1:tech:xml-schema:query" elementFormDefault="qualified">
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" schemaLocation="basic.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="identifier.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:catalogue" schemaLocation="catalogue.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="value.xsd"/>
+	<!-- Global Elements -->
+	<xs:element name="characteristic_data_query_expression" type="qy:characteristic_data_query_expression_Type"/>
+	<xs:element name="query" type="qy:query_Type"/>
+	<xs:element name="query_context" type="qy:query_context_Type"/>
+	<!-- Global Types -->
+	<!-- Characteristic Data Query Expression -->
+	<xs:complexType name="characteristic_data_query_expression_Type">
+		<xs:choice>
+			<xs:element name="cardinality" type="qy:cardinality_expression_Type"/>
+			<xs:element name="range" type="qy:range_expression_Type"/>
+			<xs:element name="string_pattern" type="qy:string_pattern_expression_Type"/>
+			<xs:element name="string_size" type="qy:string_size_expression_Type"/>
+			<xs:element name="subset" type="qy:subset_expression_Type"/>
+			<xs:element name="data_environment" type="qy:data_environment_expression_Type"/>
+			<xs:element name="or" type="qy:or_expression_Type"/>
+			<xs:element name="and" type="qy:and_expression_Type"/>
+			<xs:element name="not" type="qy:not_expression_Type"/>
+		</xs:choice>
+	</xs:complexType>
+	<!-- Or Expression -->
+	<xs:complexType name="or_expression_Type">
+		<xs:sequence>
+			<xs:element name="operand" type="qy:characteristic_data_query_expression_Type" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- And query expression -->
+	<xs:complexType name="and_expression_Type">
+		<xs:sequence>
+			<xs:element name="operand" type="qy:characteristic_data_query_expression_Type" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Not Expression -->
+	<xs:complexType name="not_expression_Type">
+		<xs:sequence>
+			<xs:element name="operand" type="qy:characteristic_data_query_expression_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- -->
+	<!-- Query Expression -->
+	<xs:complexType name="query_expression_Type" abstract="true">
+		<xs:sequence>
+			<xs:element name="property_reference" type="qy:property_reference_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Cardinality Expression -->
+	<xs:complexType name="cardinality_expression_Type">
+		<xs:complexContent>
+			<xs:extension base="qy:query_expression_Type">
+				<xs:sequence>
+					<xs:element name="minimum" type="xs:int" minOccurs="0"/>
+					<xs:element name="maximum" type="xs:int" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Range Expression -->
+	<xs:complexType name="range_expression_Type">
+		<xs:complexContent>
+			<xs:extension base="qy:query_expression_Type">
+				<xs:sequence>
+					<xs:element name="min_value" type="xs:float" minOccurs="0"/>
+					<xs:element name="max_value" type="xs:float" minOccurs="0"/>
+					<xs:element name="UOM_ref" type="id:IRDI_type" minOccurs="0"/>
+					<xs:element name="UOM_code" type="xs:string" minOccurs="0"/>
+					<xs:element name="currency_ref" type="id:IRDI_type" minOccurs="0"/>
+					<xs:element name="currency_code" type="bas:ISO_currency_code_Type" minOccurs="0"/>
+					<xs:element name="is_inclusive" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- String Pattern Expression -->
+	<xs:complexType name="string_pattern_expression_Type">
+		<xs:complexContent>
+			<xs:extension base="qy:query_expression_Type">
+				<xs:sequence>
+					<xs:element name="pattern" type="xs:string"/>
+					<xs:element name="language_ref" type="id:IRDI_type" minOccurs="0"/>
+					<xs:element name="language_code" type="bas:ISO_language_code_Type" minOccurs="0"/>
+					<xs:element name="country_code" type="bas:ISO_country_code_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- String Size Expression -->
+	<xs:complexType name="string_size_expression_Type">
+		<xs:complexContent>
+			<xs:extension base="qy:query_expression_Type">
+				<xs:sequence>
+					<xs:element name="min_length" type="xs:int" minOccurs="0"/>
+					<xs:element name="max_length" type="xs:int" minOccurs="0"/>
+					<xs:element name="language_ref" type="id:IRDI_type" minOccurs="0"/>
+					<xs:element name="language_code" type="bas:ISO_language_code_Type" minOccurs="0"/>
+					<xs:element name="country_code" type="bas:ISO_country_code_Type" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Subset Expression -->
+	<xs:complexType name="subset_expression_Type">
+		<xs:complexContent>
+			<xs:extension base="qy:query_expression_Type">
+				<xs:sequence>
+					<xs:element name="value" type="qy:value_Type" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Value -->
+	<xs:complexType name="value_Type">
+		<xs:sequence>
+			<xs:group ref="val:value_Group"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Data Environment Expression -->
+	<xs:complexType name="data_environment_expression_Type">
+		<xs:complexContent>
+			<xs:extension base="qy:query_expression_Type">
+				<xs:sequence>
+					<xs:element name="environment" type="qy:characteristic_data_query_expression_Type" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- -->
+	<!-- Property Reference -->
+	<xs:complexType name="property_reference_Type">
+		<xs:sequence>
+			<xs:element name="index" type="xs:int" minOccurs="0"/>
+			<xs:element name="property" type="qy:property_reference_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<!-- Query -->
+	<xs:complexType name="query_Type">
+		<xs:sequence>
+			<xs:element name="item_description" type="xs:string" minOccurs="0"/>
+			<xs:element name="data_specification_ref" type="id:IRDI_type" minOccurs="0"/>
+			<xs:element name="class_ref" type="id:IRDI_type" minOccurs="0"/>
+			<xs:element name="property_ref" type="id:IRDI_list_type" minOccurs="0"/>
+			<xs:element ref="cat:item" minOccurs="0"/>
+			<xs:element ref="qy:characteristic_data_query_expression" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Query Context -->
+	<xs:complexType name="query_context_Type">
+		<xs:sequence>
+			<xs:element name="requesting_organization_ref" type="id:IRDI_type"/>
+			<xs:element name="request_date_time" type="xs:dateTime"/>
+			<xs:element name="response_due_date_time" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="response_email_address" type="xs:string"/>
+			<xs:element name="point_of_contact" type="xs:string" minOccurs="0"/>
+			<xs:element ref="qy:query" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

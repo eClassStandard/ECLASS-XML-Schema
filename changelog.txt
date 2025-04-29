@@ -1,3 +1,42 @@
+5.0.0
+	Initial schema:
+		- changed all namespaces to: "5.0" (all files)
+		- changed version to "5.0" and updated restriction (header.xsd)
+		- updated ECLASS copyright year (all ECLASSXML files)
+
+	Schema documentation
+		- ECLASS: added documentation comments (all files in dictionary, i.e. ISO13584-32)
+		- Updated notices about usage of modifed schema (all ECLASSXML files).
+		
+	Refactoring:
+		Renamed EptosGUID to GUID to make the schema technology independent (all files).
+		Moved schema files into subfolders:
+			- template.xsd
+			- freerelation.xsd (relations.xsd)
+			- mapping.xsd
+			- dictionary.xsd, units.xsd
+			- query.xsd, response.xsd
+		Removed extensions since not used anymore in ECLASS 15:
+			- files ext-extensions.xsd, ext-ea.xsd, ext-relation.xsd, ext-depr.xsd)
+			- the "extensions" folder
+			- the element "ext:extensions" (dictionary.xsd, sdf.xsd)
+			- the namespace "xmlns:ext"
+		Removed SDF schema and dependency since not used anymore in ECLASS 15: (sdf.xsd, genericode.xsd) 
+		Renamed schema file freerelations.xsd to relations.xsd.
+		Renamed ontoml folder to ISO13584-32.
+		Renamed subfolder ECLASS_XML to ECLASSXML for consistency.
+		Moved ISO29002 folder out of ontoml folder, parallel to ISO13584-32
+		Added BMEcat 2005.2 as the release supported by ECLASS 15
+		Removed older BMEcat versions (only the newest 2055.2 remains: bmecat_2005onto.xsd)
+		Changed template ID to IRDIType (template.xsd)
+		Extracted ISO22745-30 types out of template schema into separate folder /ISO22745-30/ (template.xsd)
+	
+	New Implementations:
+		Support for Imported Properties in <described_by>: new flag "usage_type" in PROPERTY_REFERENCE_Type for usage in the dictionary (identifier.xsd).
+		New datatypes for URL and URN (type_system.xsd) for usage in the dictionary.
+		Support for "Intentionally not mapped target PR" (exclude_target element) (mapping.xsd).
+		New attributes for mapping-plan: irdi, name, note, type, direction, status (mapping.xsd).
+	
 4.0.0
 
 	Added TQL attribute for preferred name and definition (CLASS, PR, VL, VA, UN).

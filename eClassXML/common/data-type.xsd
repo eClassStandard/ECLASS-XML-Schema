@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 4.0.0 - XML Schema
+ECLASS XML 5.0.0 - XML Schema
 -->
 <!--
 
-ECLASS XML 4.0.0
+ECLASS XML 5.0.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© ECLASS e.v. 2023 - All rights reserved
+© ECLASS e.v. 2024 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -23,15 +23,14 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR O
 
 In addition, any modified copy of the Schema shall include the following notice:
 
-THIS SCHEMA HAS BEEN MODIFIED FROM THE eClassXML 2.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
+THIS SCHEMA HAS BEEN MODIFIED FROM THE ECLASSXML 5.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
 WITH THAT SCHEMA
 
-
-
 -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dt="urn:eclass:template:xml-schema:data-type:4.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:template:xml-schema:data-type:4.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.0">
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dt="urn:eclass:template:xml-schema:data-type:5.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:eclass:template:xml-schema:data-type:5.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.0">
 	<!-- Global Elements -->
-	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ontoML/ISO29002/identifier.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ISO29002/identifier.xsd"/>
 	<xs:element name="bag_type" type="dt:bag_type_Type" substitutionGroup="dt:datatype"/>
 	<xs:element name="boolean_type" type="dt:boolean_type_Type" substitutionGroup="dt:datatype"/>
 	<xs:element name="choice_type" type="dt:choice_type_Type" substitutionGroup="dt:datatype"/>

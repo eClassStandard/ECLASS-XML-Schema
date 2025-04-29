@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ECLASS XML 5.0.0 - XML Schema
+-->
+<!--
+Changes
+2016-10-11: added //element(*,tmpl:prescribed_property_Type)/@order_number
+2016-10-13: added simpleType eptosGUID
+2016-10-13: added simpleType REVISION_TYPE_Type
+2016-10-13: added simpleType TemplateId
+2016-10-13: added //element(*,tmpl:templateType)/@id
+2016-10-13: added //element(*,tmpl:templateType)/@guid
+2016-10-13: added //element(*,tmpl:extended_flag_Type)/tmpl:f_title
+2016-10-13: clarification: //element(*,tmpl:extended_flag_Type)/@tmpl:f_key has to contain the IRDI of a term
+2017-02-07: added template_view (2.0.2)
+2024-10-29: moved file into subfolder
+2024-11-21: changed template:id to be IRDIType instead of TemplateId
+	        removed value generation rules
+			removed partitions
+			removed condition mandatory property (required_if)
+			extracted ISO22745-30 types out of this into separate folder
+			
+-->
+<!--
+
+ECLASS XML 5.0.0
+
+The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
+and derivations of the Schema:
+
+© ECLASS e.v. 2024 - All rights reserved
+
+Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
+copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
+installing and using software based on the Schema, and to permit persons to whom the Schema is furnished to do so, 
+subject to the following conditions:
+
+THE SCHEMA IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS 
+OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR 
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR OTHER DEALINGS IN THE SCHEMA.
+
+In addition, any modified copy of the Schema shall include the following notice:
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE ECLASSXML 5.0 TEMPLATE SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
+WITH THAT SCHEMA
+
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tmpl="urn:eclass:template:xml-schema:template:5.0" xmlns:dt="urn:eclass:template:xml-schema:data-type:5.0" xmlns:cmn="urn:eclass:xml-schema:common:5.0" xmlns:hea="urn:eclass:xml-schema:header:5.0" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" xmlns:val="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" xmlns:bas="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" xmlns:ontoml="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" xmlns:ig="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:identification-guide"
+ targetNamespace="urn:eclass:template:xml-schema:template:5.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.0">
+	<xs:import namespace="urn:eclass:template:xml-schema:data-type:5.0" schemaLocation="../common/data-type.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../../ISO29002/identifier.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-10:ed-1:tech:xml-schema:value" schemaLocation="../../ISO29002/value.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-4:ed-1:tech:xml-schema:basic" schemaLocation="../../ISO29002/basic.xsd"/>
+	<xs:import namespace="urn:eclass:xml-schema:common:5.0" schemaLocation="../common/common.xsd"/>
+	<xs:import namespace="urn:eclass:xml-schema:header:5.0" schemaLocation="../common/header.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:is:13584:-32:ed-1:tech:xml-schema:ontoml" schemaLocation="../../ISO13584-32/ontoml.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:identification-guide" schemaLocation="../../ISO22745-30/identification-guide.xsd"/>
+	<!-- Global Elements -->
+	<xs:element name="eclass_templates" type="tmpl:ECLASSTEMPLATES_Type"/>
+	<xs:complexType name="ECLASSTEMPLATES_Type">
+		<xs:sequence>
+			<xs:element ref="hea:header" maxOccurs="1"/>
+			<xs:element name="template" type="tmpl:templateType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="template" type="tmpl:templateType"/>
+	<xs:element name="concept_use" type="ig:concept_use_Type"/>
+	<xs:element name="constraint" type="ig:constraint_Type"/>
+	<xs:element name="identification_guide" type="ig:identification_guide_Type"/>
+	<xs:element name="implementation_note" type="ig:implementation_note_Type"/>
+	<xs:element name="prescribed_condition_element" type="ig:prescribed_condition_element_Type"/>
+	<xs:element name="prescribed_data_environment" type="ig:prescribed_data_environment_Type"/>
+	<xs:element name="prescribed_item" type="tmpl:extended_prescribed_item_Type"/>
+	<xs:element name="extended_prescribed_property" type="tmpl:extended_prescribed_property_Type"/>
+	<xs:element name="prescribed_value" type="ig:prescribed_value_Type"/>
+	<xs:element name="user_data" type="ig:user_data_Type"/>
+	<!-- Global Types -->
+	<!-- Extended Prescribed Property -->
+	<xs:complexType name="extended_prescribed_property_Type">
+		<xs:complexContent>
+			<xs:extension base="ig:prescribed_property_Type">
+				<xs:sequence>
+					<xs:element ref="tmpl:property_context" minOccurs="0"/>
+					<xs:element ref="tmpl:overwritten_name" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="tmpl:prop_groups" minOccurs="0"/>
+					<xs:element ref="tmpl:extended_flag" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="tmpl:subset_constraint" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="target_template" type="id:IRDI_list_type"/>
+				<xs:attribute name="order_number" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- Extended Prescribed Item -->
+	<xs:complexType name="extended_prescribed_item_Type">
+		<xs:complexContent>
+			<xs:extension base="ig:prescribed_item_Type">
+				<xs:sequence>
+					<xs:element ref="tmpl:extended_prescribed_property" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="prop_groups_Type">
+		<xs:sequence>
+			<xs:element name="prop_group" type="tmpl:prop_group_ref_Type" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="prop_group_ref_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="part_group_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="overwritten_name_Type">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="language_ref" type="id:IRDI_type" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="property_context_Type">
+		<xs:sequence>
+			<xs:element name="aspect_class_element" type="tmpl:class_element_Type" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>element used when an aspect is used</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="prop_element" type="tmpl:prop_element_Type"/>
+				<xs:element name="part_of_class_element" type="tmpl:class_element_Type"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="class_element_Type">
+		<xs:attribute name="class_ref" type="id:IRDI_type"/>
+	</xs:complexType>
+	<xs:complexType name="prop_element_Type">
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required">
+			<xs:annotation>
+				<xs:documentation>reference to the property in dictionary</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="ordinal_number" type="xs:int">
+			<xs:annotation>
+				<xs:documentation>used for specifying occurence number in cardinality. The counting starts with 0</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="target_class_ref" type="id:IRDI_type">
+			<xs:annotation>
+				<xs:documentation>specifies the target class when polimorphismous</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="extended_flag_Type">
+		<xs:sequence>
+			<xs:element name="f_title" type="bas:international_text_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="f_key" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="subset_Type">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:group ref="val:value_Group"/>
+		</xs:sequence>
+		<xs:attribute name="is_open" type="xs:string" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="predefined_name_entry_Type">
+		<xs:sequence>
+			<xs:element name="entry_name" type="xs:string"/>
+			<xs:element name="predefined_name">
+				<xs:complexType>
+					<xs:attribute name="predefined_name_ref" type="id:IRDI_type"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="language_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="valuation_Type">
+		<xs:sequence minOccurs="0">
+			<xs:group ref="val:value_Group"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="id:IRDI_type"/>
+	</xs:complexType>
+	<xs:complexType name="propertyType">
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<xs:element name="property_context" type="tmpl:property_context_Type"/>
+	<xs:element name="overwritten_name" type="tmpl:overwritten_name_Type"/>
+	<xs:element name="prop_groups" type="tmpl:prop_groups_Type"/>
+	<xs:element name="extended_flag" type="tmpl:extended_flag_Type"/>
+	<xs:element name="subset_constraint" type="tmpl:subset_Type"/>
+	<xs:complexType name="templateType">
+		<xs:sequence>
+			<xs:element name="preferred_Name" type="bas:international_text_Type" minOccurs="0"/>
+			<xs:element ref="tmpl:prescribed_item"/>
+			<xs:element name="revision" type="tmpl:REVISION_TYPE_Type" minOccurs="0"/>
+			<xs:element name="template_view" type="tmpl:template_view_Type" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="is_flat" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="default" type="xs:boolean"/>
+		<xs:attribute name="id" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="guid" type="tmpl:GUID" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="template_view_Type">
+		<xs:sequence>
+			<xs:element name="template_view_name" type="ontoml:PREFERRED_NAME_Type"/>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element name="property_node" type="tmpl:property_node_Type">
+						<xs:annotation>
+							<xs:documentation>a property path reference</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="chapter" type="tmpl:chapter_Type">
+						<xs:annotation>
+							<xs:documentation>A bag of property nodes with a headline</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:choice>
+			</xs:sequence>
+		</xs:sequence>
+		<xs:attribute name="code" use="required"/>
+		<xs:attribute name="language_ref"/>
+	</xs:complexType>
+	<xs:complexType name="property_node_Type">
+		<xs:sequence>
+			<xs:element name="property_context" type="tmpl:property_context_Type" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="ontoml:PropertyId" use="required"/>
+		<xs:attribute name="order_number" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="chapter_Type">
+		<xs:sequence>
+			<xs:element name="chapter_title" type="ontoml:PREFERRED_NAME_Type"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="property_node" type="tmpl:property_node_Type"/>
+				<xs:element name="separator">
+					<xs:annotation>
+						<xs:documentation>empty element for separator in presentation (like <hr/> in HTML)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="GUID">
+		<xs:annotation>
+			<xs:documentation>Used for Unique guid and GUID2</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="REVISION_TYPE_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

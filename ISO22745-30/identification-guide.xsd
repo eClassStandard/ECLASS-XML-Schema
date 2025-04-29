@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+$Id: identification-guide.xsd 201 2009-02-05 20:39:23Z radack $
+ISO TC 184/SC 4/WG 12 N5162 - ISO 22745-30 Identification guide - XML schema
+-->
+<!--
+The following permission notice and disclaimer shall be included in all copies of this XML schema ("the Schema"), and derivations of the Schema:
+
+Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, installing and using software based on the  Schema, and to permit persons to whom the Schema is furnished to do so, subject to the following conditions:
+
+THE SCHEMA IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR OTHER DEALINGS IN THE SCHEMA.
+
+In addition, any modified copy of the Schema shall include the following notice:
+
+THIS SCHEMA HAS BEEN MODIFIED FROM THE SCHEMA DEFINED IN ISO 22745-30, AND SHOULD NOT BE INTERPRETED AS COMPLYING WITH THAT STANDARD.
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ig="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:identification-guide" xmlns:dt="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:data-type" xmlns:id="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" targetNamespace="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:identification-guide" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="urn:iso:std:iso:ts:22745:-30:ed-1:tech:xml-schema:data-type" schemaLocation="data-type.xsd"/>
+	<xs:import namespace="urn:iso:std:iso:ts:29002:-5:ed-1:tech:xml-schema:identifier" schemaLocation="../ISO29002/identifier.xsd"/>
+	<!-- Global Elements -->
+	<xs:element name="concept_use" type="ig:concept_use_Type"/>
+	<xs:element name="constraint" type="ig:constraint_Type"/>
+	<xs:element name="identification_guide" type="ig:identification_guide_Type"/>
+	<xs:element name="implementation_note" type="ig:implementation_note_Type"/>
+	<xs:element name="prescribed_condition_element" type="ig:prescribed_condition_element_Type"/>
+	<xs:element name="prescribed_data_environment" type="ig:prescribed_data_environment_Type"/>
+	<xs:element name="prescribed_item" type="ig:prescribed_item_Type"/>
+	<xs:element name="prescribed_property" type="ig:prescribed_property_Type"/>
+	<xs:element name="prescribed_value" type="ig:prescribed_value_Type"/>
+	<xs:element name="user_data" type="ig:user_data_Type"/>
+	<!-- Global Types -->
+	<!-- Concept Use -->
+	<xs:complexType name="concept_use_Type">
+		<xs:attribute name="concept_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="preferred_term_ref" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="preferred_definition_ref" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="preferred_image_ref" type="id:IRDI_type" use="optional"/>
+	</xs:complexType>
+	<!-- Constraint -->
+	<xs:complexType name="constraint_Type">
+		<xs:sequence>
+			<xs:any minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Identification Guide -->
+	<xs:complexType name="identification_guide_Type">
+		<xs:sequence>
+			<xs:element ref="ig:concept_use" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ig:prescribed_item" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="local_id" type="xs:ID" use="optional"/>
+		<xs:attribute name="title" type="xs:string" use="optional"/>
+		<xs:attribute name="manager_reference_string" type="xs:string" use="optional"/>
+		<xs:attribute name="is_strict" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Implementation Note -->
+	<xs:complexType name="implementation_note_Type" mixed="true">
+		<xs:sequence>
+			<xs:any/>
+		</xs:sequence>
+		<xs:attribute name="language_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<!-- Prescribed Condition Element -->
+	<xs:complexType name="prescribed_condition_element_Type">
+		<xs:sequence>
+			<xs:element ref="dt:datatype" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Prescribed Data Environment -->
+	<xs:complexType name="prescribed_data_environment_Type">
+		<xs:sequence>
+			<xs:element ref="ig:prescribed_condition_element" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Prescribed Item -->
+	<xs:complexType name="prescribed_item_Type">
+		<xs:sequence>
+			<xs:element ref="ig:prescribed_property" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ig:constraint" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ig:implementation_note" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="local_id" type="xs:ID" use="optional"/>
+		<xs:attribute name="class_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="must_be_dependent" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<!-- Prescribed Property -->
+	<xs:complexType name="prescribed_property_Type">
+		<xs:sequence>
+			<xs:element ref="dt:datatype" minOccurs="0"/>
+			<xs:element ref="ig:prescribed_data_environment" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ig:implementation_note" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="ig:user_data" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="id" type="id:IRDI_type" use="optional"/>
+		<xs:attribute name="property_ref" type="id:IRDI_type" use="required"/>
+		<xs:attribute name="is_required" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="combination_allowed" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="one_of_allowed" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="multiple_instances_allowed" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="is_differentiating" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="is_strict" type="xs:boolean" use="optional" default="true"/>
+	</xs:complexType>
+	<!-- Prescribed Value -->
+	<xs:complexType name="prescribed_value_Type">
+		<xs:attribute name="value_ref" type="id:IRDI_type" use="required"/>
+	</xs:complexType>
+	<!-- User Data -->
+	<xs:complexType name="user_data_Type">
+		<xs:sequence>
+			<xs:any/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

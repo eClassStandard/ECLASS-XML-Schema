@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-ECLASS XML 4.0.0 - XML Schema
+ECLASS XML 5.0.0 - XML Schema
+Changes in 5.0.0: added new restriction for schema_version
 Changes in 4.0.0: added new restriction for schema_version
 Changes in 3.1: added new restriction for schema_version
 Changes in 3.0.1: added new restriction for schema_version
 -->
 <!--
 
-ECLASS XML 4.0.0
+ECLASS XML 5.0.0
 
 The following permission notice and disclaimer shall be included in all copies of this DTD/XML Schema ("the Schema"), 
 and derivations of the Schema:
 
-© ECLASS e.v. 2023 - All rights reserved
+© ECLASS e.v. 2024 - All rights reserved
 
 Permission is hereby granted, free of charge in perpetuity, to any person obtaining a copy of the Schema, to use, 
 copy, modify, merge and distribute free of charge, copies of the Schema for the purposes of developing, implementing, 
@@ -26,14 +27,13 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SCHEMA OR THE USE OR O
 
 In addition, any modified copy of the Schema shall include the following notice:
 
-THIS SCHEMA HAS BEEN MODIFIED FROM THE eClassXML 2.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
+THIS SCHEMA HAS BEEN MODIFIED FROM THE ECLASSXML 5.0 DICTIONARY SCHEMA, AND SHOULD NOT BE INTERPRETED AS COMPLYING 
 WITH THAT SCHEMA
 
-
-
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:hea="urn:eclass:xml-schema:header:4.0" xmlns:cmn="urn:eclass:xml-schema:common:4.0" xmlns:ns1="urn:eclass:xml-schema:header:4.0" targetNamespace="urn:eclass:xml-schema:header:4.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="4.0">
-	<xsd:import namespace="urn:eclass:xml-schema:common:4.0" schemaLocation="./common.xsd"/>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:hea="urn:eclass:xml-schema:header:5.0" xmlns:cmn="urn:eclass:xml-schema:common:5.0" xmlns:ns1="urn:eclass:xml-schema:header:5.0" targetNamespace="urn:eclass:xml-schema:header:5.0" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="5.0">
+	<xsd:import namespace="urn:eclass:xml-schema:common:5.0" schemaLocation="./common.xsd"/>
 	<xsd:element name="header" type="hea:DOCUMENTHEADER_Type"/>
 	<xsd:complexType name="DOCUMENTHEADER_Type">
 		<xsd:annotation>
@@ -48,6 +48,7 @@ WITH THAT SCHEMA
 						<xsd:pattern value="ECLASS XML 3\.0"/>
 						<xsd:pattern value="ECLASS XML 3\.1"/>
 						<xsd:pattern value="ECLASS XML 4\.0"/>
+						<xsd:pattern value="ECLASS XML 5\.0"/>
 					</xsd:restriction>
 				</xsd:simpleType>
 			</xsd:element>
